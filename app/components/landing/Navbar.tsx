@@ -29,16 +29,16 @@ export function Navbar() {
             className="flex items-center space-x-3"
             whileHover={{ scale: 1.02 }}
           >
-            <motion.div
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-xl font-bold text-white bg-gradient-to-br from-pink-500 via-purple-500 to-cyan-500"
+            <motion.img
+              src="/logo.png"
+              alt="Nexion Logo"
+              className="w-10 h-10"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
-            >
-              &gt;_
-            </motion.div>
-            <span className="text-xl font-bold bg-gradient-to-r from-[#BCFF2F] to-blue-400 bg-clip-text text-transparent">
+            />
+            {/* <span className="text-xl font-bold bg-gradient-to-r from-[#BCFF2F] to-blue-400 bg-clip-text text-transparent">
               Nexion
-            </span>
+            </span> */}
           </motion.div>
           
           <motion.div

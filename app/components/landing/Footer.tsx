@@ -48,7 +48,7 @@ export function Footer() {
             </motion.div>
             
             <motion.div
-              className="text-gray-400 max-w-md mb-6"
+              className="text-gray-400 max-w-[400px] mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
