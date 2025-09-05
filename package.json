@@ -9,12 +9,20 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.1",
+    "@react-router/fs-routes": "^7.8.2",
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
+    "gsap": "^3.13.0",
     "isbot": "^5.1.27",
+    "lucide-react": "^0.542.0",
+    "ogl": "^1.0.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.7.1"
+    "react-router": "^7.7.1",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@react-router/dev": "^7.7.1",
@@ -22,6 +30,7 @@
     "@types/node": "^20",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@types/three": "^0.180.0",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
