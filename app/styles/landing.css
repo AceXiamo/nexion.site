@@ -1,0 +1,230 @@
+/* OKX 风格背景动画 */
+.gradient-bg {
+  background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #272727, #BCFF2F);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* OKX 风格粒子效果 */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(188, 255, 47, 0.6);
+  border-radius: 50%;
+  animation: particle-float 12s infinite linear;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* OKX 风格终端窗口 */
+.terminal-window {
+  background: #0f0f0f;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+}
+
+.terminal-window:hover {
+  background: #272727;
+  border-color: #333333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.terminal-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #333333;
+  padding: 12px 16px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* OKX 风格终端控制点 */
+.dot-red { 
+  background: #FF4747; 
+  transition: all 0.2s ease;
+}
+
+.dot-yellow { 
+  background: #FF9500; 
+  transition: all 0.2s ease;
+}
+
+.dot-green { 
+  background: #00D26B; 
+  transition: all 0.2s ease;
+}
+
+.terminal-header:hover .dot-red { background: #ff6b6b; }
+.terminal-header:hover .dot-yellow { background: #ffb347; }
+.terminal-header:hover .dot-green { background: #32d67a; }
+
+/* 神经网络动画背景 */
+.neural-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 50%, rgba(188, 255, 47, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  animation: neural-pulse 8s ease-in-out infinite;
+}
+
+@keyframes neural-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Tailwind 自定义动画类 */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(188, 255, 47, 0.5); }
+  100% { box-shadow: 0 0 40px rgba(188, 255, 47, 0.8); }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s infinite;
+}
+
+/* 悬浮卡片效果 */
+.card-hover {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.card-hover:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 20px 40px rgba(188, 255, 47, 0.2);
+}
+
+/* 滚动动画 */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 打字机效果光标 */
+.typewriter-cursor::after {
+  content: "|";
+  animation: blink 1s infinite;
+  color: #BCFF2F;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* 渐变文字动画 */
+.gradient-text {
+  background: linear-gradient(-45deg, #BCFF2F, #00d4ff, #8b5cf6, #BCFF2F);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-text 4s ease infinite;
+}
+
+@keyframes gradient-text {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .particles {
+    display: none; /* 移动端隐藏粒子效果以提升性能 */
+  }
+  
+  .neural-bg {
+    opacity: 0.3; /* 降低移动端背景透明度 */
+  }
+}
+
+/* 深色主题色彩变量 */
+:root {
+  --nexion-primary: #BCFF2F;
+  --nexion-dark: #0f0f0f;
+  --nexion-gray: #1a1a1a;
+}
