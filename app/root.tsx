@@ -39,6 +39,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(NexionStructuredData) }}
         />
+        <script
+          defer
+          src="https://axm-umami.zeabur.app/script.js"
+          data-website-id="29295dbf-dbac-4279-b1ee-5bfdb280f606"
+        />
       </head>
       <body>
         {children}
