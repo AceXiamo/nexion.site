@@ -130,7 +130,7 @@ export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Pr
   }
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 relative overflow-hidden" id="demo">
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <div className="absolute -top-10 left-8 w-64 h-64 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(188,255,47,0.12), transparent 60%)' }} />
         <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.12), transparent 60%)' }} />
@@ -159,7 +159,7 @@ export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Pr
             <video ref={videoRef} src={src} className="w-full h-full object-cover" preload="metadata" playsInline controls={false} onClick={togglePlay} />
 
             {/* Play/Pause overlay */}
-            <div className='inset-0 absolute flex justify-center items-center'>
+            <div className="inset-0 absolute flex justify-center items-center">
               <button
                 ref={playBtnRef}
                 onClick={togglePlay}

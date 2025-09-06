@@ -15,6 +15,7 @@ const techHrefs = [
 
 const socialLinks = [
   { icon: "mdi:github", href: "https://github.com/NexionDev" },
+  { icon: "mdi:email", href: "mailto:acexiamo@gmail.com" },
   // { icon: "mdi:twitter", href: "#" },
   // { icon: "mdi:discord", href: "#" }
 ];

@@ -32,7 +32,7 @@ export function Download() {
     else setOs("linux");
   }, []);
 
-  const latestUrl = "https://github.com/AceXiamo/Nexion/releases/latest";
+  const latestUrl = "https://github.com/NexionDev/app/releases";
 
   return (
     <section ref={ref} id="download" className="py-20">
@@ -106,7 +106,7 @@ export function Download() {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <a
-            href="https://github.com/AceXiamo/Nexion"
+            href="https://github.com/NexionDev"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-white/10 text-gray-300 hover:text-white hover:border-white/30 transition-colors"
