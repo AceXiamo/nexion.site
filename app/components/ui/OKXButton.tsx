@@ -114,7 +114,7 @@ export function OKXButton({
 
 // 预设的按钮组合
 export const OKXButtons = {
-  Download: ({ className, href = "https://github.com/AceXiamo/Nexion/releases", target = "_blank", ...props }: Omit<OKXButtonProps, 'children'>) => {
+  Download: ({ className, href = "https://github.com/NexionDev/app/releases", target = "_blank", ...props }: Omit<OKXButtonProps, 'children'>) => {
     const { t } = useLanguage();
     return (
       <OKXButton 
@@ -136,7 +136,7 @@ export const OKXButtons = {
       <OKXButton 
         variant="secondary" 
         icon="mdi:github" 
-        href="https://github.com/AceXiamo/Nexion"
+        href="https://github.com/NexionDev"
         target="_blank"
         className={className}
         {...props}
