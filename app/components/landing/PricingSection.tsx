@@ -3,10 +3,19 @@ import { Icon } from "@iconify/react";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { OKXCard } from "../ui/OKXCard";
+import { useLanguage } from "../../i18n/useLanguage";
 
 const FEES_OKB = { registration: 0.1, addConfig: 0.02, updateConfig: 0.005 };
 
 export function PricingSection() {
+  const { t } = useLanguage();
+  const fees = t('pricing.fees', { returnObjects: true }) as Array<{
+    title: string;
+    description: string;
+    price: string;
+  }>;
+  const advantages = t('pricing.advantages.items', { returnObjects: true }) as string[];
+  
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -19,8 +28,8 @@ export function PricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">透明 <span className="text-[#BCFF2F]">定价策略</span></h2>
-          <p className="text-base md:text-lg text-gray-400 mt-3">只对链上价值交互收费；终端与 FTP 完全免费</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">{t('pricing.title')}</h2>
+          <p className="text-base md:text-lg text-gray-400 mt-3">{t('pricing.subtitle')}</p>
         </motion.div>
         {/* 收费规则（精简说明） */}
         <motion.div
@@ -30,49 +39,21 @@ export function PricingSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div className="divide-y divide-white/10 border border-white/10 rounded-xl overflow-hidden">
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <Icon icon="mdi:account-plus" className="text-[#BCFF2F]" />
-                <div>
-                  <div className="text-white font-medium">用户注册（一次性）</div>
-                  <div className="text-gray-400 text-sm">激活链上身份</div>
+            {fees.map((fee, i) => {
+              const icons = ["mdi:account-plus", "mdi:server-plus", "mdi:pencil"];
+              return (
+                <div key={i} className="flex items-center justify-between p-4">
+                  <div className="flex items-center gap-3">
+                    <Icon icon={icons[i]} className="text-[#BCFF2F]" />
+                    <div>
+                      <div className="text-white font-medium">{fee.title}</div>
+                      <div className="text-gray-400 text-sm">{fee.description}</div>
+                    </div>
+                  </div>
+                  <div className="text-white font-semibold">{fee.price}</div>
                 </div>
-              </div>
-              <div className="text-white font-semibold">{FEES_OKB.registration} OKB</div>
-            </div>
-
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <Icon icon="mdi:server-plus" className="text-[#BCFF2F]" />
-                <div>
-                  <div className="text-white font-medium">新增配置</div>
-                  <div className="text-gray-400 text-sm">每个 SSH 配置上链存储</div>
-                </div>
-              </div>
-              <div className="text-white font-semibold">{FEES_OKB.addConfig} OKB / 个</div>
-            </div>
-
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <Icon icon="mdi:pencil" className="text-[#BCFF2F]" />
-                <div>
-                  <div className="text-white font-medium">编辑配置</div>
-                  <div className="text-gray-400 text-sm">更新链上配置数据</div>
-                </div>
-              </div>
-              <div className="text-white font-semibold">{FEES_OKB.updateConfig} OKB / 次</div>
-            </div>
-
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <Icon icon="mdi:delete" className="text-gray-400" />
-                <div>
-                  <div className="text-white/80 font-medium">删除配置</div>
-                  <div className="text-gray-400 text-sm">标记为失活，可随时恢复/清理</div>
-                </div>
-              </div>
-              <div className="text-gray-300 font-semibold">免费</div>
-            </div>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -84,12 +65,14 @@ export function PricingSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="rounded-xl border border-white/10 p-5">
-            <div className="text-white font-semibold mb-3">我们的优势</div>
+            <div className="text-white font-semibold mb-3">{t('pricing.advantages.title')}</div>
             <ul className="text-gray-400 text-sm space-y-2">
-              <li className="flex items-start gap-2"><Icon icon="mdi:check" className="text-[#BCFF2F] mt-0.5" />无订阅、无月费：按需付费，用多少付多少</li>
-              <li className="flex items-start gap-2"><Icon icon="mdi:check" className="text-[#BCFF2F] mt-0.5" />只对链上价值交互收费：注册 / 新增 / 编辑配置</li>
-              <li className="flex items-start gap-2"><Icon icon="mdi:check" className="text-[#BCFF2F] mt-0.5" />连接与传输完全免费：终端与 FTP / SFTP 不收费</li>
-              <li className="flex items-start gap-2"><Icon icon="mdi:check" className="text-[#BCFF2F] mt-0.5" />不同于订阅制，避免长期固定成本</li>
+              {advantages.map((advantage, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <Icon icon="mdi:check" className="text-[#BCFF2F] mt-0.5" />
+                  {advantage}
+                </li>
+              ))}
             </ul>
           </div>
         </motion.div>
@@ -101,7 +84,7 @@ export function PricingSection() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <p>* 实际费用以交易时 OKB 市价为准；费用由合约设定，可链上查询</p>
+          <p>{t('pricing.note')}</p>
         </motion.div>
       </div>
     </section>

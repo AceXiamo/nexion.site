@@ -1,14 +1,24 @@
 import { motion, useInView } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../i18n/useLanguage";
 
-const PLATFORMS = [
-  { key: "windows", name: "Windows", desc: "即将推出", icon: "mdi:microsoft-windows", available: false },
-  { key: "mac", name: "macOS", desc: "适用于 macOS 11+", icon: "mdi:apple", available: true },
-  { key: "linux", name: "Linux", desc: "即将推出", icon: "mdi:linux", available: false },
+const PLATFORM_ICONS = [
+  "mdi:microsoft-windows",
+  "mdi:apple", 
+  "mdi:linux"
 ] as const;
 
+const PLATFORM_AVAILABILITY = [false, true, false];
+
 export function Download() {
+  const { t } = useLanguage();
+  const platforms = [
+    { key: "windows", name: t('download.platforms.windows.name'), desc: t('download.platforms.windows.description') },
+    { key: "mac", name: t('download.platforms.mac.name'), desc: t('download.platforms.mac.description') },
+    { key: "linux", name: t('download.platforms.linux.name'), desc: t('download.platforms.linux.description') },
+  ];
+  
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [os, setOs] = useState<"windows" | "mac" | "linux" | undefined>();
@@ -32,16 +42,16 @@ export function Download() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">下载 Nexion</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">{t('download.title')}</h2>
           <p className="text-base md:text-lg text-gray-400 mb-10">
-            目前提供 macOS 下载，Windows / Linux 即将推出（从 GitHub Releases 获取）
+            {t('download.subtitle')}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          {PLATFORMS.map((p) => {
+          {platforms.map((p, i) => {
             const isRecommended = p.key === "mac" && os === "mac";
-            const disabled = !p.available;
+            const disabled = !PLATFORM_AVAILABILITY[i];
             const commonClasses = `group block text-left p-5 rounded-xl border transition-colors ${
               disabled
                 ? "border-white/10 bg-white/[0.02] opacity-60 cursor-not-allowed"
@@ -59,27 +69,27 @@ export function Download() {
               >
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center">
-                    <Icon icon={p.icon} className={`w-5 h-5 ${disabled ? "text-white/50" : "text-white/80 group-hover:text-[#BCFF2F]"}`} />
+                    <Icon icon={PLATFORM_ICONS[i]} className={`w-5 h-5 ${disabled ? "text-white/50" : "text-white/80 group-hover:text-[#BCFF2F]"}`} />
                   </div>
                   <div>
                     <div className="text-white font-medium flex items-center gap-2">
                       {p.name}
                       {isRecommended && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#BCFF2F]/15 text-[#BCFF2F]">推荐</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#BCFF2F]/15 text-[#BCFF2F]">{t('download.recommended')}</span>
                       )}
-                      {!p.available && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/70">即将推出</span>
+                      {!PLATFORM_AVAILABILITY[i] && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/70">{p.desc}</span>
                       )}
                     </div>
                     <div className="text-sm text-gray-400 mt-1">{p.desc}</div>
                   </div>
                 </div>
-                <div className="mt-4 inline-flex items-center text-sm ${disabled ? 'text-white/40' : 'text-[#BCFF2F]'}">
+                <div className={`mt-4 inline-flex items-center text-sm ${disabled ? 'text-white/40' : 'text-[#BCFF2F]'}`}>
                   {disabled ? (
-                    <>敬请期待</>
+                    <>{p.desc}</>
                   ) : (
                     <>
-                      前往 Releases 下载
+                      {t('download.github')}
                       <Icon icon="mdi:external-link" className="ml-1" />
                     </>
                   )}
@@ -102,10 +112,10 @@ export function Download() {
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-white/10 text-gray-300 hover:text-white hover:border-white/30 transition-colors"
           >
             <Icon icon="mdi:github" />
-            查看源码
+            {t('footer.links.openSource')}
           </a>
           <p className="text-sm text-gray-500 mt-4">
-            提示：首次使用需安装 OKX Wallet 或其他 WalletConnect 兼容钱包
+            {t('download.tip')}
           </p>
         </motion.div>
       </div>

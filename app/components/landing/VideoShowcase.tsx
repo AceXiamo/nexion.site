@@ -1,12 +1,14 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLanguage } from '../../i18n/useLanguage'
 
 type Props = {
   src?: string
 }
 
 export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Props) {
+  const { t } = useLanguage()
   const sectionRef = useRef<HTMLDivElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
@@ -136,8 +138,8 @@ export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Pr
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">产品演示</h2>
-          <p className="text-gray-400">1 分钟，快速理解 Nexion</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('videoShowcase.title')}</h2>
+          <p className="text-gray-400">{t('videoShowcase.description')}</p>
         </div>
 
         <div ref={frameRef} onMouseMove={onMouseMove} className="relative rounded-2xl overflow-hidden border-12 bg-black/40 backdrop-blur-sm" style={{ borderColor: '#ffffff10' }}>
@@ -160,7 +162,7 @@ export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Pr
             <button
               ref={playBtnRef}
               onClick={togglePlay}
-              aria-label={isPlaying ? '暂停' : '播放'}
+              aria-label={isPlaying ? '暂停' : t('videoShowcase.playButton')}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-16 w-16 rounded-full bg-[#BCFF2F] text-black font-bold flex items-center justify-center shadow-[0_0_40px_rgba(188,255,47,0.5)] hover:scale-105 transition will-change-transform"
             >
               {isPlaying ? (
@@ -208,7 +210,7 @@ export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Pr
         </div>
 
         {/* Tips */}
-        <div className="mt-4 text-center text-sm text-gray-400">点击播放，滚动页面可感受光影随动效果。</div>
+        <div className="mt-4 text-center text-sm text-gray-400">{t('videoShowcase.subtitle')}</div>
       </div>
     </section>
   )

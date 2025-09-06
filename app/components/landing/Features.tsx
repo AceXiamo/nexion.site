@@ -2,65 +2,34 @@ import { Icon } from "@iconify/react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "../../i18n/useLanguage";
 
-const features = [
-  {
-    icon: "mdi:wallet",
-    title: "Web3 身份认证",
-    description: "告别复杂的SSH密钥管理，使用你熟悉的加密钱包进行身份验证。一个钱包，连接所有服务器。",
-    highlight: "支持 OKX、MetaMask、Trust Wallet",
-    gradient: "from-[#BCFF2F] to-green-400",
-    bgGradient: "from-[#BCFF2F]/10 to-green-400/10",
-    delay: 0
-  },
-  {
-    icon: "mdi:database-lock",
-    title: "区块链存储",
-    description: "SSH配置通过ECIES加密存储在X Layer区块链上，确保数据永不丢失，完全由你控制。",
-    highlight: "年费用仅 $1.20，超低Gas成本",
-    gradient: "from-blue-500 to-purple-500",
-    bgGradient: "from-blue-500/10 to-purple-500/10",
-    delay: 0.2
-  },
-  {
-    icon: "mdi:shield-lock",
-    title: "军事级加密",
-    description: "采用ECIES + ChaCha20Poly1305加密算法，确保你的SSH配置和连接信息绝对安全。",
-    highlight: "抗量子计算，面向未来",
-    gradient: "from-red-500 to-pink-500",
-    bgGradient: "from-red-500/10 to-pink-500/10",
-    delay: 0.4
-  },
-  {
-    icon: "mdi:laptop",
-    title: "跨平台体验",
-    description: "基于Electron构建，完美支持Windows、macOS、Linux。现代化界面，原生应用体验。",
-    highlight: "一次配置，处处可用",
-    gradient: "from-yellow-500 to-orange-500",
-    bgGradient: "from-yellow-500/10 to-orange-500/10",
-    delay: 0.6
-  },
-  {
-    icon: "mdi:sync",
-    title: "多设备同步",
-    description: "配置存储在区块链上，无论在哪台设备上，只要连接钱包就能访问你的所有SSH配置。",
-    highlight: "随时随地，无缝切换",
-    gradient: "from-teal-500 to-cyan-500",
-    bgGradient: "from-teal-500/10 to-cyan-500/10",
-    delay: 0.8
-  },
-  {
-    icon: "mdi:github",
-    title: "开源 & 透明",
-    description: "核心代码开源，智能合约公开可验证。社区驱动发展，任何人都可以审查和贡献。",
-    highlight: "信任通过代码建立",
-    gradient: "from-purple-500 to-indigo-500",
-    bgGradient: "from-purple-500/10 to-indigo-500/10",
-    delay: 1.0
-  }
+const featureIcons = [
+  "mdi:wallet",
+  "mdi:database-lock", 
+  "mdi:shield-lock",
+  "mdi:laptop",
+  "mdi:sync",
+  "mdi:github"
+];
+
+const featureGradients = [
+  { gradient: "from-[#BCFF2F] to-green-400", bgGradient: "from-[#BCFF2F]/10 to-green-400/10" },
+  { gradient: "from-blue-500 to-purple-500", bgGradient: "from-blue-500/10 to-purple-500/10" },
+  { gradient: "from-red-500 to-pink-500", bgGradient: "from-red-500/10 to-pink-500/10" },
+  { gradient: "from-yellow-500 to-orange-500", bgGradient: "from-yellow-500/10 to-orange-500/10" },
+  { gradient: "from-teal-500 to-cyan-500", bgGradient: "from-teal-500/10 to-cyan-500/10" },
+  { gradient: "from-purple-500 to-indigo-500", bgGradient: "from-purple-500/10 to-indigo-500/10" }
 ];
 
 export function Features() {
+  const { t } = useLanguage();
+  const features = t('features.items', { returnObjects: true }) as Array<{
+    title: string;
+    description: string;
+    highlight: string;
+  }>;
+  
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
   const underlineRef = useRef<HTMLSpanElement[]>([]);
@@ -115,10 +84,10 @@ export function Features() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
-            为什么选择 <span className="text-[#BCFF2F]">Nexion</span>
+            {t('features.title')} <span className="text-[#BCFF2F]">Nexion</span>
           </h2>
           <p className="text-base md:text-lg text-gray-400 mt-3">
-            用更简单的方式，获得更强的安全与协作能力
+            {t('features.subtitle')}
           </p>
         </div>
 
@@ -132,7 +101,7 @@ export function Features() {
               <div className="flex items-start gap-4">
                 <div className="mt-1">
                   <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center">
-                    <Icon icon={f.icon} className="w-4 h-4 text-white/80 group-hover:text-[#BCFF2F] transition-colors" />
+                    <Icon icon={featureIcons[i]} className="w-4 h-4 text-white/80 group-hover:text-[#BCFF2F] transition-colors" />
                   </div>
                 </div>
                 <div>

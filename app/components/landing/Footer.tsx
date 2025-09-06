@@ -1,18 +1,14 @@
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { useLanguage } from "../../i18n/useLanguage";
 
-const productLinks = [
-  { name: "功能特性", href: "#features" },
-  { name: "定价策略", href: "#pricing" },
-  { name: "下载体验", href: "#download" },
-  { name: "使用文档", href: "https://github.com/AceXiamo/Nexion/wiki" }
-];
+const productHrefs = ["#features", "#pricing", "#download", "https://github.com/AceXiamo/Nexion/wiki"];
 
-const techLinks = [
-  { name: "X Layer", href: "https://www.okx.com/xlayer", external: true },
-  { name: "OKX Wallet", href: "https://www.okx.com/web3", external: true },
-  { name: "开源代码", href: "https://github.com/AceXiamo/Nexion", external: true },
-  { name: "智能合约", href: "https://github.com/AceXiamo/Nexion/tree/main/contracts", external: true }
+const techHrefs = [
+  "https://www.okx.com/xlayer",
+  "https://www.okx.com/web3",
+  "https://github.com/AceXiamo/Nexion",
+  "https://github.com/AceXiamo/Nexion/tree/main/contracts"
 ];
 
 const socialLinks = [
@@ -22,6 +18,21 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useLanguage();
+  
+  const productLinks = [
+    { name: t('footer.links.features'), href: productHrefs[0] },
+    { name: t('footer.links.pricing'), href: productHrefs[1] },
+    { name: t('footer.links.download'), href: productHrefs[2] },
+    { name: t('footer.links.docs'), href: productHrefs[3] }
+  ];
+
+  const techLinks = [
+    { name: t('footer.links.xlayer'), href: techHrefs[0], external: true },
+    { name: t('footer.links.okxWallet'), href: techHrefs[1], external: true },
+    { name: t('footer.links.openSource'), href: techHrefs[2], external: true },
+    { name: t('footer.links.contracts'), href: techHrefs[3], external: true }
+  ];
   return (
     <footer className="py-12 border-t border-white/10 bg-black">
       <div className="max-w-5xl mx-auto px-6">
@@ -54,7 +65,7 @@ export function Footer() {
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              下一代Web3 SSH管理器，让去中心化技术为服务器管理带来革命性体验。
+              {t('footer.description')}
             </motion.div>
             
             <motion.div
@@ -87,7 +98,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold text-white mb-4">产品</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.product')}</h4>
             <ul className="space-y-2">
               {productLinks.map((link, index) => (
                 <motion.li
@@ -113,7 +124,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold text-white mb-4">技术</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.technology')}</h4>
             <ul className="space-y-2">
               {techLinks.map((link, index) => (
                 <motion.li
@@ -145,9 +156,9 @@ export function Footer() {
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <p>&copy; 2025 Nexion. 采用 Apache 2.0 许可证开源.</p>
+          <p>{t('footer.copyright')}</p>
           <p className="mt-2">
-            构建于 <span className="text-[#BCFF2F]">X Layer</span> 区块链网络
+            {t('footer.poweredBy')}
           </p>
         </motion.div>
       </div>

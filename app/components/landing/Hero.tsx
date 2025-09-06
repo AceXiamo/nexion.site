@@ -7,6 +7,7 @@ import LightRays from '../ui/LightRays'
 import { OKXButtons } from '../ui/OKXButton'
 import { useInView, motion, AnimatePresence } from 'framer-motion'
 import { MultilineTypewriter } from '../effects/GSAPTypewriter'
+import { useLanguage } from '../../i18n/useLanguage'
 
 // 终端演示卡片（玻璃拟态）
 function TerminalDemo({ active }: { active: boolean }) {
@@ -43,6 +44,7 @@ function TerminalDemo({ active }: { active: boolean }) {
 }
 
 export function Hero() {
+  const { t } = useLanguage()
   // GSAP refs
   const heroRef = useRef<HTMLDivElement>(null)
   const titleContainerRef = useRef<HTMLDivElement>(null)
@@ -52,7 +54,7 @@ export function Hero() {
   const sectionInView = useInView(heroRef, { once: true, amount: 0.3 })
   const [allowMotion, setAllowMotion] = useState<boolean>(true)
   const [keywordIndex, setKeywordIndex] = useState(0)
-  const keywords = ['统一身份认证', '链上加密存储', '审计可追溯', '团队权限管理']
+  const keywords = t('hero.keywords', { returnObjects: true }) as string[]
 
   // 尊重系统减少动效设置，避免加载时副作用与性能抖动
   useEffect(() => {
@@ -169,24 +171,24 @@ export function Hero() {
             {/* 左：标题与卖点 */}
             <div className="md:col-span-7 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-white/5 border border-white/10 text-gray-300">v0.1.0-beta</span>
-                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-[#BCFF2F]/10 border border-[#BCFF2F]/30 text-[#BCFF2F]">Built on X Layer • OKX Wallet</span>
+                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-white/5 border border-white/10 text-gray-300">{t('hero.version')}</span>
+                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-[#BCFF2F]/10 border border-[#BCFF2F]/30 text-[#BCFF2F]">{t('hero.builtOn')}</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
-                <span className="bg-gradient-to-r from-[#BCFF2F] via-[#00D26B] to-[#3B82F6] bg-clip-text text-transparent">用钱包，一键管理所有 SSH</span>
+                <span className="bg-gradient-to-r from-[#BCFF2F] via-[#00D26B] to-[#3B82F6] bg-clip-text text-transparent">{t('hero.title')}</span>
               </h1>
 
               <div className="mt-5 md:mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
-                <span className="text-gray-400 text-base">钱包即身份</span>
+                <span className="text-gray-400 text-base">{t('hero.tagline1')}</span>
                 <span className="w-1 h-1 rounded-full bg-gray-600" />
-                <span className="text-gray-400 text-base">配置上链</span>
+                <span className="text-gray-400 text-base">{t('hero.tagline2')}</span>
                 <span className="w-1 h-1 rounded-full bg-gray-600" />
-                <span className="text-gray-400 text-base">端到端加密</span>
+                <span className="text-gray-400 text-base">{t('hero.tagline3')}</span>
               </div>
 
               <div ref={subtitleRef} className={`mt-6 ${allowMotion ? 'opacity-0 translate-y-8' : ''}`}>
-                <div className="text-sm text-gray-400">核心能力：</div>
+                <div className="text-sm text-gray-400">{t('hero.coreCapabilities')}</div>
                 <div className="h-9 relative overflow-hidden text-lg md:text-xl font-semibold">
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -206,9 +208,9 @@ export function Hero() {
               <div ref={descriptionRef} className={`mt-6 md:mt-8 max-w-2xl mx-auto md:mx-0 ${allowMotion ? 'opacity-0 translate-y-8' : ''}`}>
                 <div className="min-h-[48px] sm:min-h-[48px] md:min-h-[56px]">
                   {allowMotion ? (
-                    <TypingGlow text="统一身份认证 · 链上加密存储 · 审计可追溯 · 团队权限管理" className="block text-base md:text-lg text-[#CCCCCC]" speed={26} delay={600} />
+                    <TypingGlow text={t('hero.description')} className="block text-base md:text-lg text-[#CCCCCC]" speed={26} delay={600} />
                   ) : (
-                    <p className="text-base md:text-lg text-[#CCCCCC]">统一身份认证 · 链上加密存储 · 审计可追溯 · 团队权限管理</p>
+                    <p className="text-base md:text-lg text-[#CCCCCC]">{t('hero.description')}</p>
                   )}
                 </div>
               </div>
@@ -221,13 +223,13 @@ export function Hero() {
 
               <div className="mt-6 flex items-center justify-center md:justify-start gap-4 text-gray-500">
                 <span className="inline-flex items-center gap-2 text-sm">
-                  <Icon icon="mdi:shield-lock" className="text-[#BCFF2F]" /> 端到端加密
+                  <Icon icon="mdi:shield-lock" className="text-[#BCFF2F]" /> {t('hero.features.encryption')}
                 </span>
                 <span className="inline-flex items-center gap-2 text-sm">
-                  <Icon icon="mdi:ethereum" className="text-[#BCFF2F]" /> EVM兼容
+                  <Icon icon="mdi:ethereum" className="text-[#BCFF2F]" /> {t('hero.features.compatible')}
                 </span>
                 <span className="inline-flex items-center gap-2 text-sm">
-                  <Icon icon="mdi:cash" className="text-[#BCFF2F]" /> Gas ~$0.01
+                  <Icon icon="mdi:cash" className="text-[#BCFF2F]" /> {t('hero.features.lowCost')}
                 </span>
               </div>
             </div>
@@ -251,7 +253,7 @@ export function Hero() {
             </span>
             <span className="w-1 h-1 rounded-full bg-gray-600" />
             <span className="text-sm inline-flex items-center gap-2">
-              <Icon icon="mdi:license" className="text-[#BCFF2F]" /> Apache 2.0
+              <Icon icon="mdi:license" className="text-[#BCFF2F]" /> {t('hero.ecosystem.license')}
             </span>
           </div>
         </div>

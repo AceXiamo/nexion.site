@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../../i18n/useLanguage'
+import { LanguageSwitcher } from '../common/LanguageSwitcher'
 
 export function Navbar() {
+  const { t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [hasAnimated, setHasAnimated] = useState(() => {
     // Check if navigation animation has already been shown in this session
@@ -42,17 +45,18 @@ export function Navbar() {
 
           <div className="flex items-center gap-6">
             <a href="/" className="text-gray-300 hover:text-white transition-colors">
-              首页
+              {t('nav.home')}
             </a>
             {/* <a href="#download" className="text-gray-300 hover:text-white transition-colors">
-              下载
+              {t('nav.download')}
             </a> */}
             <a href="/docs/getting-started" className="text-gray-300 hover:text-white transition-colors">
-              文档
+              {t('nav.docs')}
             </a>
             <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
-              <span>GitHub</span>
+              <span>{t('nav.github')}</span>
             </a>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
