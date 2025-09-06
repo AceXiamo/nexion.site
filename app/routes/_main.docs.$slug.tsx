@@ -75,23 +75,24 @@ export default function DocPage() {
   }
 
   const components = {
-    h1: (props: any) => <h1 {...props} className="scroll-mt-24 text-3xl md:text-4xl font-bold mt-6 mb-4 tracking-tight [&>a]:no-underline [&>a]:text-inherit hover:[&>a]:no-underline" />,
-    h2: (props: any) => <h2 {...props} className="scroll-mt-24 text-2xl md:text-3xl font-semibold mt-10 mb-3 tracking-tight [&>a]:no-underline [&>a]:text-inherit hover:[&>a]:no-underline" />,
-    h3: (props: any) => <h3 {...props} className="scroll-mt-24 text-xl md:text-2xl font-semibold mt-8 mb-2 [&>a]:no-underline [&>a]:text-inherit hover:[&>a]:no-underline" />,
-    p: (props: any) => <p {...props} className="text-gray-300 leading-7 my-4" />,
+    h1: (props: any) => <h1 {...props} className="scroll-mt-20 text-2xl md:text-3xl font-bold mt-5 mb-3 tracking-tight [&>a]:no-underline [&>a]:text-inherit hover:[&>a]:no-underline" />,
+    h2: (props: any) => <h2 {...props} className="scroll-mt-20 text-xl md:text-2xl font-semibold mt-8 mb-2.5 tracking-tight [&>a]:no-underline [&>a]:text-inherit hover:[&>a]:no-underline" />,
+    h3: (props: any) => <h3 {...props} className="scroll-mt-20 text-lg md:text-xl font-semibold mt-6 mb-2 [&>a]:no-underline [&>a]:text-inherit hover:[&>a]:no-underline" />,
+    p: (props: any) => <p {...props} className="text-gray-300 text-sm md:text-base leading-6 md:leading-7 my-3" />,
     a: (props: any) => <a {...props} className="text-white/90 hover:text-white no-underline hover:underline underline-offset-2 decoration-white/30 transition-colors" />,
-    ul: (props: any) => <ul {...props} className="list-disc pl-6 my-4 marker:text-white/40" />,
-    ol: (props: any) => <ol {...props} className="list-decimal pl-6 my-4" />,
-    blockquote: (props: any) => <blockquote {...props} className="my-6 border-l-2 border-white/15 pl-4 text-gray-300" />,
-    code: (props: any) => <code {...props} className="px-1.5 py-0.5 rounded text-white" />,
+    ul: (props: any) => <ul {...props} className="list-disc pl-5 my-3 text-sm md:text-base marker:text-white/40 space-y-1" />,
+    ol: (props: any) => <ol {...props} className="list-decimal pl-5 my-3 text-sm md:text-base space-y-1" />,
+    li: (props: any) => <li {...props} className="text-gray-300 leading-6" />,
+    blockquote: (props: any) => <blockquote {...props} className="my-4 border-l-2 border-white/15 pl-3 text-gray-300 text-sm md:text-base italic" />,
+    code: (props: any) => <code {...props} className="px-1.5 py-0.5 rounded bg-white/10 text-[#BCFF2F] text-sm font-mono" />,
     pre: Pre,
-    hr: (props: any) => <hr {...props} className="my-8 border-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />,
+    hr: (props: any) => <hr {...props} className="my-6 border-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />,
   } as const
 
   const { Component } = item
 
   return (
-    <section className="h-screen overflow-hidden pt-24">
+    <section className="pt-24 pb-12">
       <div className="max-w-7xl mx-auto h-full px-6">
         {/* 移动端导航下拉菜单 */}
         <div className="md:hidden pb-4">
@@ -133,7 +134,7 @@ export default function DocPage() {
           {/* 可滚动内容区域 */}
           <article className="relative flex-1 bg-gradient-to-br from-black via-black to-black/95 md:rounded-l-xl border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.25)] overflow-hidden">
             <div ref={scrollRef} className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-              <div ref={contentRef} className="max-w-4xl py-8 md:py-12 px-6 md:px-8">
+              <div ref={contentRef} className="max-w-3xl py-6 md:py-8 px-4 md:px-6">
                 <div className="prose prose-invert max-w-none">
                   <MDXProvider components={components}>
                     <Component />
@@ -141,14 +142,14 @@ export default function DocPage() {
                 </div>
 
                 {/* 文档底部导航 */}
-                <div className="mt-16 pt-8 border-t border-white/10">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div className="text-sm text-gray-400">{t('docs.lastUpdated')}: {new Date().toLocaleDateString()}</div>
-                    <div className="flex gap-4">
-                      <a href="https://github.com/AceXiamo/Nexion/issues" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-[#BCFF2F] transition-colors">
+                <div className="mt-12 pt-6 border-t border-white/10">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div className="text-xs text-gray-400">{t('docs.lastUpdated')}: {new Date().toLocaleDateString()}</div>
+                    <div className="flex gap-3">
+                      <a href="https://github.com/AceXiamo/Nexion/issues" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-[#BCFF2F] transition-colors">
                         {t('docs.reportIssue')}
                       </a>
-                      <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-[#BCFF2F] transition-colors">
+                      <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-[#BCFF2F] transition-colors">
                         {t('docs.editPage')}
                       </a>
                     </div>
