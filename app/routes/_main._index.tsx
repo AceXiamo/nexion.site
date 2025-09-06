@@ -1,11 +1,11 @@
 import type { Route } from "./+types/home";
-import { Navbar } from "../components/landing/Navbar";
 import { Hero } from "../components/landing/Hero";
 import { Features } from "../components/landing/Features";
 import { Comparison } from "../components/landing/Comparison";
 import { PricingSection } from "../components/landing/PricingSection";
 import { Download } from "../components/landing/Download";
 import { Footer } from "../components/landing/Footer";
+import { VideoShowcase } from "../components/landing/VideoShowcase";
 import "../styles/landing.css";
 
 export function meta({}: Route.MetaArgs) {
@@ -22,9 +22,9 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div className="bg-black text-white overflow-x-hidden">
-      <Navbar />
       <Hero />
       <Features />
+      <VideoShowcase />
       <Comparison />
       <PricingSection />
       <Download />
