@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useLanguage } from "../../i18n/useLanguage";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 const productHrefs = ["#features", "#pricing", "#download", "https://github.com/AceXiamo/Nexion/wiki"];
 
@@ -19,6 +21,34 @@ const socialLinks = [
 
 export function Footer() {
   const { t } = useLanguage();
+  const brandRef = useRef<HTMLSpanElement>(null)
+
+  // 动态文字渐变（GSAP 背景位移动画）
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const el = brandRef.current
+    if (!el) return
+
+    // 初始化渐变背景（使用多停靠点，形成流动效果）
+    el.style.backgroundImage = 'linear-gradient(90deg, #BCFF2F, #00D26B, #3B82F6, #BCFF2F)'
+    el.style.backgroundSize = '200% 200%'
+    el.style.backgroundPosition = '0% 50%'
+
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mq.matches) return
+
+    const tween = gsap.to(el, {
+      backgroundPosition: '200% 50%',
+      duration: 8,
+      ease: 'none',
+      repeat: -1,
+      yoyo: true,
+    })
+
+    return () => {
+      tween?.kill()
+    }
+  }, [])
   
   const productLinks = [
     { name: t('footer.links.features'), href: productHrefs[0] },
@@ -53,7 +83,10 @@ export function Footer() {
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
               />
-              <span className="text-xl font-bold bg-gradient-to-r from-[#BCFF2F] to-blue-400 bg-clip-text text-transparent">
+              <span
+                ref={brandRef}
+                className="text-xl font-bold bg-clip-text text-transparent inline-block"
+              >
                 Nexion
               </span>
             </motion.div>
@@ -150,7 +183,7 @@ export function Footer() {
         </div>
         
         <motion.div
-          className="border-t border-white/10 mt-12 pt-8 text-center text-gray-500"
+          className="border-t border-white/10 mt-12 pt-8 text-center text-gray-500 text-xs"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}

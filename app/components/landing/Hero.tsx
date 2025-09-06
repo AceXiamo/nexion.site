@@ -6,20 +6,95 @@ import { TypingGlow } from '../effects/SpectacularText'
 import LightRays from '../ui/LightRays'
 import { OKXButtons } from '../ui/OKXButton'
 import { useInView, motion, AnimatePresence } from 'framer-motion'
-import { MultilineTypewriter } from '../effects/GSAPTypewriter'
+// 移除终端打字动画，改为静态渲染，避免重复内容
 import { useLanguage } from '../../i18n/useLanguage'
 
 // 终端演示卡片（玻璃拟态）
 function TerminalDemo({ active }: { active: boolean }) {
-  const lines = [
-    '$ nexion wallet connect',
-    '✔️ Connected: 0x5573...9433 (OKX Wallet)',
-    '$ nexion config list',
-    '• prod-admin  • staging  • db-primary',
-    '$ nexion connect prod-admin',
-    '🔐 decrypting on-chain config...',
-    '✅ SSH connected: ubuntu@prod.example.com',
-  ]
+  const cmd1Ref = useRef<HTMLSpanElement>(null)
+  const out1Ref = useRef<HTMLSpanElement>(null)
+  const cmd2Ref = useRef<HTMLSpanElement>(null)
+  const out2Ref = useRef<HTMLSpanElement>(null)
+  const cmd3Ref = useRef<HTMLSpanElement>(null)
+  const out3Ref = useRef<HTMLSpanElement>(null)
+  const out4Ref = useRef<HTMLSpanElement>(null)
+
+  // 文本常量（不做 i18n）
+  const L1 = '$ nexion wallet connect'
+  const L2 = '✔️ Connected: 0x5573...9433 (OKX Wallet)'
+  const L3 = '$ nexion config list'
+  const L4 = '• prod-admin  • staging  • db-primary'
+  const L5 = '$ nexion connect prod-admin'
+  const L6 = '🔐 decrypting on-chain config...'
+  const L7 = '✅ SSH connected: ubuntu@prod.example.com'
+
+  const startedRef = useRef(false)
+  const rafRef = useRef<number | null>(null)
+  const timeoutsRef = useRef<number[]>([])
+
+  useEffect(() => {
+    const clearTimers = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      timeoutsRef.current.forEach((t) => clearTimeout(t))
+      timeoutsRef.current = []
+    }
+
+    const setText = (el: HTMLSpanElement | null, text: string) => {
+      if (!el) return
+      el.textContent = text
+    }
+
+    const typeLine = (el: HTMLSpanElement | null, text: string, cps = 28): Promise<void> => {
+      return new Promise((resolve) => {
+        if (!el) return resolve()
+        el.textContent = ''
+        let i = 0
+        const step = () => {
+          if (!el) return resolve()
+          i += 1
+          el.textContent = text.slice(0, i)
+          if (i >= text.length) return resolve()
+          rafRef.current = requestAnimationFrame(step)
+        }
+        // 用 setTimeout 启动一次，避免首帧长任务阻塞
+        const id = window.setTimeout(() => {
+          rafRef.current = requestAnimationFrame(step)
+        }, 30)
+        timeoutsRef.current.push(id)
+      })
+    }
+
+    const run = async () => {
+      if (!active) {
+        // 非激活：仅展示前两行，其他清空
+        setText(cmd1Ref.current, L1)
+        setText(out1Ref.current, L2)
+        setText(cmd2Ref.current, '')
+        setText(out2Ref.current, '')
+        setText(cmd3Ref.current, '')
+        setText(out3Ref.current, '')
+        setText(out4Ref.current, '')
+        return
+      }
+      if (startedRef.current) return
+      startedRef.current = true
+
+      // 顺序打字（固定 DOM，不使用 map 渲染）
+      await typeLine(cmd1Ref.current, L1)
+      await typeLine(out1Ref.current, L2)
+      await typeLine(cmd2Ref.current, L3)
+      await typeLine(out2Ref.current, L4)
+      await typeLine(cmd3Ref.current, L5)
+      await typeLine(out3Ref.current, L6)
+      await typeLine(out4Ref.current, L7)
+    }
+
+    run()
+
+    return () => {
+      clearTimers()
+    }
+  }, [active])
 
   return (
     <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 shadow-2xl text-left">
@@ -29,15 +104,15 @@ function TerminalDemo({ active }: { active: boolean }) {
         <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
         <span className="ml-3 text-xs text-gray-400">Nexion • SSH Manager</span>
       </div>
-      <div className="font-mono text-[12px] sm:text-[13px] leading-relaxed text-gray-200 min-h-[168px] sm:min-h-[176px]">
-        {active ? (
-          <MultilineTypewriter lines={lines} speed={28} lineDelay={600} />
-        ) : (
-          <>
-            <div className="text-gray-400">$ nexion wallet connect</div>
-            <div>✔️ Connected: 0x5573...9433 (OKX Wallet)</div>
-          </>
-        )}
+      <div className="font-mono text-[12px] sm:text-[13px] leading-relaxed text-gray-200 min-h-[148px]">
+        {/* 固定 DOM 结构：每一行是一个 div，不使用 map */}
+        <div className="text-gray-400"><span ref={cmd1Ref} /></div>
+        <div><span ref={out1Ref} /></div>
+        <div className="text-gray-400"><span ref={cmd2Ref} /></div>
+        <div><span ref={out2Ref} /></div>
+        <div className="text-gray-400"><span ref={cmd3Ref} /></div>
+        <div><span ref={out3Ref} /></div>
+        <div><span ref={out4Ref} /></div>
       </div>
     </div>
   )
