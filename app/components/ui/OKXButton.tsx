@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import type { ReactNode } from "react";
+import { useLanguage } from "../../i18n/useLanguage";
 
 interface OKXButtonProps {
   variant?: 'primary' | 'secondary' | 'icon' | 'ghost';
@@ -113,43 +114,52 @@ export function OKXButton({
 
 // 预设的按钮组合
 export const OKXButtons = {
-  Download: ({ className, href = "https://github.com/AceXiamo/Nexion/releases", target = "_blank", ...props }: Omit<OKXButtonProps, 'children'>) => (
-    <OKXButton 
-      variant="primary" 
-      icon="mdi:download" 
-      href={href}
-      target={target}
-      className={className}
-      {...props}
-    >
-      立即下载
-    </OKXButton>
-  ),
+  Download: ({ className, href = "https://github.com/AceXiamo/Nexion/releases", target = "_blank", ...props }: Omit<OKXButtonProps, 'children'>) => {
+    const { t } = useLanguage();
+    return (
+      <OKXButton 
+        variant="primary" 
+        icon="mdi:download" 
+        href={href}
+        target={target}
+        className={className}
+        {...props}
+      >
+        {t('buttons.download')}
+      </OKXButton>
+    );
+  },
 
-  GitHub: ({ className, ...props }: Omit<OKXButtonProps, 'children' | 'href' | 'target'>) => (
-    <OKXButton 
-      variant="secondary" 
-      icon="mdi:github" 
-      href="https://github.com/AceXiamo/Nexion"
-      target="_blank"
-      className={className}
-      {...props}
-    >
-      查看源码
-    </OKXButton>
-  ),
+  GitHub: ({ className, ...props }: Omit<OKXButtonProps, 'children' | 'href' | 'target'>) => {
+    const { t } = useLanguage();
+    return (
+      <OKXButton 
+        variant="secondary" 
+        icon="mdi:github" 
+        href="https://github.com/AceXiamo/Nexion"
+        target="_blank"
+        className={className}
+        {...props}
+      >
+        {t('buttons.github')}
+      </OKXButton>
+    );
+  },
 
-  Demo: ({ className, href = "#demo", ...props }: Omit<OKXButtonProps, 'children'>) => (
-    <OKXButton 
-      variant="ghost" 
-      icon="mdi:play-circle" 
-      href={href}
-      className={className}
-      {...props}
-    >
-      观看演示
-    </OKXButton>
-  ),
+  Demo: ({ className, href = "#demo", ...props }: Omit<OKXButtonProps, 'children'>) => {
+    const { t } = useLanguage();
+    return (
+      <OKXButton 
+        variant="ghost" 
+        icon="mdi:play-circle" 
+        href={href}
+        className={className}
+        {...props}
+      >
+        {t('buttons.demo')}
+      </OKXButton>
+    );
+  },
 
   Connect: ({ className, ...props }: Omit<OKXButtonProps, 'children'>) => (
     <OKXButton 
