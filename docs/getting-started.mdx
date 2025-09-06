@@ -10,22 +10,190 @@ Nexion 是一款创新的 SSH 管理工具，它：
 - **基于 OKB 的透明定价**，按需付费，节省高达 95% 成本
 - **支持多种 Web3 钱包**，包括 OKX Wallet、MetaMask 等
 
-## 📥 安装与设置
+## 📱 第一步：安装 Web3 钱包
 
-### 1. 下载应用
+### 什么是 Web3 钱包？
 
-访问我们的 [下载页面](#download)，选择适合你操作系统的版本：
-- **Windows** - `.exe` 安装包
-- **macOS** - `.dmg` 安装包  
-- **Linux** - `.AppImage` 或 `.deb` 包
+Web3 钱包是你的数字身份和资产管理工具，类似于传统的银行卡，但更安全：
+- **私钥由你完全控制**，无需信任第三方
+- **支持多种加密货币**，包括 OKB、ETH 等
+- **一个钱包，多平台使用**，手机、电脑通用
 
-### 2. 连接 Web3 钱包
+### 推荐钱包：OKX
 
-首次启动时：
-1. 点击"连接钱包"按钮
-2. 选择你的钱包类型（推荐 **OKX Wallet**）
-3. 授权连接并签名验证身份
-4. 完成！你的身份已绑定到区块链
+我们推荐使用 **OKX 生态产品**，它包含完整的交易所和钱包功能：
+
+#### 方案一：OKX 主应用（推荐新手）
+包含交易所 + 钱包功能，适合需要充值购买 OKB 的用户：
+
+<div style={{display: "flex", gap: "10px", alignItems: "center"}}>
+  <a href="https://apps.apple.com/us/app/okx-buy-bitcoin-btc-crypto/id1327268470?platform=iphone">
+    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style={{height: "50px"}} />
+  </a>
+  <a href="https://play.google.com/store/search?q=okx&c=apps">
+    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style={{height: "70px"}} />
+  </a>
+</div>
+
+#### 方案二：OKX Wallet（独立钱包）
+纯钱包功能，适合已有 OKB 的高级用户：
+
+<div style={{display: "flex", gap: "10px", alignItems: "center"}}>
+  <a href="https://apps.apple.com/us/app/okx-wallet-portal-to-web3/id6743309484">
+    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style={{height: "50px"}} />
+  </a>
+  <a href="https://play.google.com/store/apps/details?id=com.okx.wallet">
+    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style={{height: "70px"}} />
+  </a>
+</div>
+
+### 初学者钱包设置教程
+
+#### 第一步：创建钱包
+1. 下载并安装 OKX 应用
+2. 打开应用，选择"创建钱包"
+3. 设置安全密码（6-20位字符）
+4. 进入备份助记词环节
+
+<img src="https://r2.acexiamo.com/nexion:to-web3-zh.jpg" style={{height: "400px"}} />
+<br />
+
+#### 第二步：备份助记词（极其重要！）
+1. **记录助记词**：用纸笔抄写12个英文单词
+2. **妥善保存**：放在安全的地方，不要截图或云端存储
+3. **验证助记词**：按提示顺序点击单词验证
+
+> ⚠️ **重要提醒**：助记词是恢复钱包的唯一方式，丢失助记词 = 丢失资产！
+
+#### 第三步：获取 OKB 代币
+
+##### 对于区块链新手：通过 OKX 交易所购买
+
+1. **法币购买 USDT**
+   ```
+   OKX首页 → "买币" → 选择 USDT → 输入金额 → 选择支付方式
+   ```
+
+<img src="https://r2.acexiamo.com/nexion:trading-zh.jpg" style={{height: "400px"}} />
+<br />
+
+2. **将 USDT 兑换为 OKB**
+   ```
+   首页 → "交易" → "闪兑" → USDT 换 OKB → 确认兑换
+   ```
+<img src="https://r2.acexiamo.com/nexion:convert-zh.jpg" style={{height: "400px"}} />
+<br />
+
+3. **转账到钱包地址**
+   ```
+   资产 → OKB → 提币 → 输入钱包地址 → 选择 X Layer 网络 → 确认转账
+   ```
+<img src="https://r2.acexiamo.com/nexion:withdraw-zh.jpg" style={{height: "400px"}} />
+<br />
+
+##### 对于区块链老手：直接转账
+如果你已经有 OKB 或其他代币，可以：
+- 从其他交易所转账 OKB 到你的钱包地址
+- 使用跨链桥将其他链的资产转换为 X Layer 上的 OKB
+- 通过 DEX 交换其他代币为 OKB
+
+#### 第四步：切换到 X Layer 网络
+
+Nexion 运行在 **X Layer** 区块链上，需要切换网络：
+
+1. **打开钱包设置**
+   ```
+   钱包首页 → 右上角网络名称 → 添加网络
+   ```
+
+2 **切换到 X Layer**
+   - 添加成功后，选择 X Layer 作为当前网络
+   - 确保你的 OKB 在 X Layer 网络上
+
+<img src="https://r2.acexiamo.com/nexion:network-zh.jpg" style={{height: "400px"}} />
+<br />
+
+## 📥 第二步：安装 Nexion
+
+### 下载应用
+
+访问我们的 [安装指南](/docs/installation) 下载适合你系统的版本：
+- **macOS** - 已发布，支持 Intel 和 Apple Silicon
+- **Windows/Linux** - 开发中，敬请期待
+
+### 为什么 Nexion 更安全？
+
+**传统 SSH 管理的问题：**
+- 私钥文件容易丢失或被盗
+- 配置存储在本地，难以同步
+- 密码认证容易被暴力破解
+- 无法追踪访问历史
+
+**Nexion 的 Web3 解决方案：**
+- **钱包签名认证**：使用加密学级别的数字签名，比传统密码安全千倍
+- **区块链存储**：配置加密存储在去中心化网络，永不丢失
+- **身份去中心化**：你的钱包地址就是身份，无需注册账号
+- **操作可追溯**：所有操作记录在区块链上，完整审计历史
+
+## 🔗 第三步：连接钱包
+
+### 连接流程
+
+首次启动 Nexion 时：
+
+1. **点击"连接钱包"**
+   - 应用会自动检测可用的钱包
+   - 推荐使用 OKX Wallet
+
+2. **选择钱包类型**
+   ```
+   OKX Wallet (推荐) - 专为 OKB 生态优化
+   MetaMask - 广泛使用的以太坊钱包
+   WalletConnect - 支持多种移动钱包
+   ```
+
+3. **授权连接**
+   - 钱包会弹出连接请求
+   - 点击"连接"授权应用访问
+
+4. **身份验证签名**
+   - 应用要求签名验证身份
+   - 签名是免费的，不消耗代币
+   - 点击"签名"完成身份绑定
+
+### 我们如何使用你的钱包？
+
+**Nexion 基于钱包的实现方式：**
+
+1. **身份识别**
+   ```
+   钱包地址 = 你的唯一身份ID
+   无需用户名/密码，钱包地址即身份
+   ```
+
+2. **数据加密**
+   ```
+   SSH配置 → 钱包私钥加密 → 上传区块链
+   只有你的钱包能解密自己的配置
+   ```
+
+3. **操作授权**
+   ```
+   每次重要操作 → 钱包签名确认 → 执行操作
+   防止未授权访问，确保操作安全
+   ```
+
+4. **支付费用**
+   ```
+   存储/连接费用 → 自动从钱包扣除 OKB
+   透明定价，按需付费
+   ```
+
+**安全保障：**
+- 🔐 **私钥不离开钱包**：Nexion 无法访问你的私钥
+- 🛡️ **端到端加密**：配置在本地加密，服务器无法读取
+- 📝 **操作可审计**：所有操作记录在区块链，公开透明
+- ⚡ **去中心化**：无单点故障，数据永远可访问
 
 ## 🖥️ 添加第一台服务器
 
@@ -65,6 +233,8 @@ Nexion 采用**按需付费**模式：
 - **连接费用**: 0.0001 OKB/次连接
 - **数据同步**: 免费（基于 X Layer 网络）
 
+> 🎯 **早期用户优势**: 当前为早期优惠价格！随着企业级功能上线，定价将会调整。现在加入可锁定优惠价格并享受后续功能升级。
+
 ## 🔧 常见问题
 
 ### 钱包连接失败？
@@ -85,6 +255,7 @@ Nexion 采用**按需付费**模式：
 
 恭喜！你已经掌握了 Nexion 的基本使用。接下来可以：
 
+- 查看 [产品路线图](/docs/roadmap) 了解即将推出的企业级功能
 - 查看 [高级功能](/docs/advanced-features) 了解更多特性
 - 阅读 [安全指南](/docs/security) 了解最佳实践
 - 查看 [故障排除](/docs/troubleshooting) 解决常见问题
@@ -94,4 +265,3 @@ Nexion 采用**按需付费**模式：
 > 💡 **提示**: 你可以在任何时候点击应用内的 **"帮助"** 按钮访问这些文档。
 
 有问题？加入我们的 [社区论坛](https://github.com/AceXiamo/Nexion/discussions) 或提交 [Issues](https://github.com/AceXiamo/Nexion/issues)！
-
