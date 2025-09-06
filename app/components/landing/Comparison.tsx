@@ -21,7 +21,7 @@ const nexionIcons = [
 ];
 
 export function Comparison() {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const traditionalItems = t('comparison.traditional.items', { returnObjects: true }) as Array<{
     title: string;
     description: string;
@@ -35,6 +35,7 @@ export function Comparison() {
   const leftRef = useRef<HTMLDivElement[]>([]);
   const rightRef = useRef<HTMLDivElement[]>([]);
   const [allowMotion, setAllowMotion] = useState(true);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   leftRef.current = [];
   rightRef.current = [];
@@ -54,31 +55,44 @@ export function Comparison() {
     const ctx = gsap.context(() => {
       gsap.set([leftRef.current, rightRef.current], { opacity: 0, y: allowMotion ? 12 : 0 });
 
-      ScrollTrigger.create({
+      const trigger = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top 78%",
-        once: true,
+        once: false, // Allow retriggering
         onEnter: () => {
-          gsap.to(leftRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: allowMotion ? 0.5 : 0.01,
-            ease: "power2.out",
-            stagger: 0.06,
-          });
-          gsap.to(rightRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: allowMotion ? 0.5 : 0.01,
-            ease: "power2.out",
-            stagger: 0.06,
-            delay: 0.08,
-          });
+          if (!hasAnimated || currentLanguage) {
+            gsap.to(leftRef.current, {
+              opacity: 1,
+              y: 0,
+              duration: allowMotion ? 0.5 : 0.01,
+              ease: "power2.out",
+              stagger: 0.06,
+            });
+            gsap.to(rightRef.current, {
+              opacity: 1,
+              y: 0,
+              duration: allowMotion ? 0.5 : 0.01,
+              ease: "power2.out",
+              stagger: 0.06,
+              delay: 0.08,
+            });
+            setHasAnimated(true);
+          }
         },
       });
+      
+      return () => trigger.kill();
     }, sectionRef);
     return () => ctx.revert();
-  }, [allowMotion]);
+  }, [allowMotion, currentLanguage, hasAnimated]);
+
+  // Reset animation state when language changes
+  useLayoutEffect(() => {
+    setHasAnimated(false);
+    if (sectionRef.current && leftRef.current.length > 0 && rightRef.current.length > 0) {
+      gsap.set([leftRef.current, rightRef.current], { opacity: 0, y: allowMotion ? 12 : 0 });
+    }
+  }, [currentLanguage, allowMotion]);
 
   return (
     <section ref={sectionRef} className="py-20">

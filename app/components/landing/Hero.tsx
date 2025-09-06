@@ -44,7 +44,7 @@ function TerminalDemo({ active }: { active: boolean }) {
 }
 
 export function Hero() {
-  const { t } = useLanguage()
+  const { t, currentLanguage } = useLanguage()
   // GSAP refs
   const heroRef = useRef<HTMLDivElement>(null)
   const titleContainerRef = useRef<HTMLDivElement>(null)
@@ -54,6 +54,7 @@ export function Hero() {
   const sectionInView = useInView(heroRef, { once: true, amount: 0.3 })
   const [allowMotion, setAllowMotion] = useState<boolean>(true)
   const [keywordIndex, setKeywordIndex] = useState(0)
+  const [typingKey, setTypingKey] = useState(0) // Force TypingGlow re-mount
   const keywords = t('hero.keywords', { returnObjects: true }) as string[]
 
   // 尊重系统减少动效设置，避免加载时副作用与性能抖动
@@ -141,7 +142,12 @@ export function Hero() {
       setKeywordIndex((i) => (i + 1) % keywords.length)
     }, 2200)
     return () => clearInterval(t)
-  }, [sectionInView, allowMotion])
+  }, [sectionInView, allowMotion, keywords.length])
+
+  // Reset TypingGlow animation when language changes
+  useEffect(() => {
+    setTypingKey(prev => prev + 1)
+  }, [currentLanguage])
 
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
@@ -208,7 +214,13 @@ export function Hero() {
               <div ref={descriptionRef} className={`mt-6 md:mt-8 max-w-2xl mx-auto md:mx-0 ${allowMotion ? 'opacity-0 translate-y-8' : ''}`}>
                 <div className="min-h-[48px] sm:min-h-[48px] md:min-h-[56px]">
                   {allowMotion ? (
-                    <TypingGlow text={t('hero.description')} className="block text-base md:text-lg text-[#CCCCCC]" speed={26} delay={600} />
+                    <TypingGlow 
+                      key={`typing-${typingKey}-${currentLanguage}`}
+                      text={t('hero.description')} 
+                      className="block text-base md:text-lg text-[#CCCCCC]" 
+                      speed={26} 
+                      delay={600} 
+                    />
                   ) : (
                     <p className="text-base md:text-lg text-[#CCCCCC]">{t('hero.description')}</p>
                   )}

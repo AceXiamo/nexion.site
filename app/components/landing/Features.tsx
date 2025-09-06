@@ -23,7 +23,7 @@ const featureGradients = [
 ];
 
 export function Features() {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const features = t('features.items', { returnObjects: true }) as Array<{
     title: string;
     description: string;
@@ -34,6 +34,7 @@ export function Features() {
   const itemsRef = useRef<HTMLDivElement[]>([]);
   const underlineRef = useRef<HTMLSpanElement[]>([]);
   const [allowMotion, setAllowMotion] = useState(true);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
@@ -51,30 +52,44 @@ export function Features() {
       gsap.set(itemsRef.current, { opacity: 0, y: allowMotion ? 12 : 0 });
       gsap.set(underlineRef.current, { scaleX: 0, transformOrigin: "0% 50%" });
 
-      ScrollTrigger.create({
+      const trigger = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top 75%",
-        once: true,
+        once: false, // Allow retriggering
         onEnter: () => {
-          gsap.to(itemsRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: allowMotion ? 0.6 : 0.01,
-            ease: "power2.out",
-            stagger: 0.08,
-          });
-          gsap.to(underlineRef.current, {
-            scaleX: 1,
-            duration: 0.7,
-            ease: "power3.out",
-            stagger: 0.08,
-            delay: 0.1,
-          });
+          if (!hasAnimated || currentLanguage) {
+            gsap.to(itemsRef.current, {
+              opacity: 1,
+              y: 0,
+              duration: allowMotion ? 0.6 : 0.01,
+              ease: "power2.out",
+              stagger: 0.08,
+            });
+            gsap.to(underlineRef.current, {
+              scaleX: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              stagger: 0.08,
+              delay: 0.1,
+            });
+            setHasAnimated(true);
+          }
         },
       });
+      
+      return () => trigger.kill();
     }, sectionRef);
     return () => ctx.revert();
-  }, [allowMotion]);
+  }, [allowMotion, currentLanguage, hasAnimated]);
+
+  // Reset animation state when language changes
+  useLayoutEffect(() => {
+    setHasAnimated(false);
+    if (sectionRef.current && itemsRef.current.length > 0) {
+      gsap.set(itemsRef.current, { opacity: 0, y: allowMotion ? 12 : 0 });
+      gsap.set(underlineRef.current, { scaleX: 0, transformOrigin: "0% 50%" });
+    }
+  }, [currentLanguage, allowMotion]);
 
   itemsRef.current = [];
   underlineRef.current = [];
