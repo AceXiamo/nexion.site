@@ -92,8 +92,8 @@ export default function DocPage() {
   const { Component } = item
 
   return (
-    <section className="pt-24 pb-12">
-      <div className="max-w-7xl mx-auto h-full px-6">
+    <section className="h-screen overflow-y-auto pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-6">
         {/* 移动端导航下拉菜单 */}
         <div className="md:hidden pb-4">
           <select value={slug} onChange={(e) => nav(`/docs/${e.target.value}`)} className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white text-sm capitalize" aria-label={t('docs.mobile.selectDoc')}>
@@ -109,7 +109,7 @@ export default function DocPage() {
         <div className="h-full flex">
           {/* 固定左侧边栏 - 仅桌面端显示 */}
           <aside className="hidden md:flex md:w-64 flex-shrink-0 mr-6">
-            <div className="sticky top-24 w-full">
+            <div className="sticky top-0 w-full h-max">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.25)] overflow-hidden">
                 <div className="px-4 pt-4 pb-3 border-b border-white/10">
                   <h2 className="text-xs uppercase tracking-wider text-gray-400">{t('docs.navigation')}</h2>
