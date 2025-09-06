@@ -21,7 +21,7 @@ const resources = {
       },
       // Hero section
       hero: {
-        version: 'v0.1.0-beta',
+        version: 'v1.0',
         builtOn: 'Built on X Layer • OKX Wallet',
         title: '用钱包，一键管理所有 SSH',
         tagline1: '钱包即身份',
@@ -264,7 +264,7 @@ const resources = {
       },
       // Hero section
       hero: {
-        version: 'v0.1.0-beta',
+        version: 'v1.0',
         builtOn: 'Built on X Layer • OKX Wallet',
         title: 'Manage All SSH with Your Wallet',
         tagline1: 'Wallet as Identity',
