@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import "./i18n/config";
 import { NexionStructuredData } from "./components/common/SEOHead";
 
 export const links: Route.LinksFunction = () => [
