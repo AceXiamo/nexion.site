@@ -1,0 +1,277 @@
+# 安装指南
+
+本章详细介绍如何在不同操作系统上安装和配置 Nexion。
+
+## 💻 系统要求
+
+### 最低要求
+- **内存**: 512 MB RAM
+- **存储**: 100 MB 可用空间
+- **网络**: 稳定的互联网连接
+- **浏览器**: 支持 Web3 的现代浏览器（Chrome、Firefox、Safari）
+
+### 推荐配置
+- **内存**: 2 GB RAM 或更多
+- **存储**: 1 GB 可用空间
+- **CPU**: 多核处理器
+- **网络**: 宽带连接
+
+## 🪟 Windows 安装
+
+### 方法一：安装包安装
+
+1. **下载安装包**
+   - 访问 [Nexion 官网](#download)
+   - 点击"下载 Windows 版本"
+   - 下载 `Nexion-Setup-x.x.x.exe`
+
+2. **运行安装程序**
+   ```
+   双击 Nexion-Setup-x.x.x.exe
+   → 选择安装路径（默认：C:\Program Files\Nexion）
+   → 点击"安装"
+   → 等待安装完成
+   ```
+
+3. **首次启动**
+   - 从开始菜单启动 Nexion
+   - 或双击桌面快捷方式
+
+### 方法二：便携版
+
+1. 下载 `Nexion-Portable-x.x.x.zip`
+2. 解压到任意目录
+3. 双击 `Nexion.exe` 运行
+
+## 🍎 macOS 安装
+
+### 通过 DMG 安装
+
+1. **下载 DMG 文件**
+   ```
+   下载 Nexion-x.x.x.dmg
+   ```
+
+2. **安装应用**
+   ```
+   双击 DMG 文件
+   → 拖拽 Nexion 到 Applications 文件夹
+   → 等待复制完成
+   ```
+
+3. **首次启动**
+   ```
+   打开 Applications 文件夹
+   → 双击 Nexion
+   → 点击"打开"（如果出现安全提示）
+   ```
+
+### 解决 Gatekeeper 问题
+
+如果遇到"无法打开，因为来自身份不明的开发者"：
+
+```bash
+# 方法一：通过系统偏好设置
+系统偏好设置 → 安全性与隐私 → 通用 → 点击"仍要打开"
+
+# 方法二：通过终端
+xattr -cr /Applications/Nexion.app
+```
+
+## 🐧 Linux 安装
+
+### Ubuntu/Debian (.deb)
+
+```bash
+# 下载 deb 包
+wget https://releases.nexion.app/linux/nexion_x.x.x_amd64.deb
+
+# 安装
+sudo dpkg -i nexion_x.x.x_amd64.deb
+
+# 修复依赖（如果需要）
+sudo apt-get install -f
+
+# 启动
+nexion
+```
+
+### AppImage（通用）
+
+```bash
+# 下载 AppImage
+wget https://releases.nexion.app/linux/Nexion-x.x.x.AppImage
+
+# 添加执行权限
+chmod +x Nexion-x.x.x.AppImage
+
+# 运行
+./Nexion-x.x.x.AppImage
+```
+
+### Arch Linux (AUR)
+
+```bash
+# 使用 yay
+yay -S nexion-bin
+
+# 或使用 paru
+paru -S nexion-bin
+```
+
+### Flatpak
+
+```bash
+# 添加 Flathub 仓库（如果尚未添加）
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# 安装 Nexion
+flatpak install flathub com.nexion.Nexion
+
+# 运行
+flatpak run com.nexion.Nexion
+```
+
+## 🔧 配置
+
+### 初始配置向导
+
+首次启动 Nexion 时，会出现配置向导：
+
+1. **选择语言**
+   - 中文 (简体)
+   - English
+   - 日本語
+
+2. **网络设置**
+   - 主网（推荐）
+   - 测试网（开发用）
+   - 自定义节点
+
+3. **数据目录**
+   - 默认位置：
+     - Windows: `%APPDATA%\Nexion`
+     - macOS: `~/Library/Application Support/Nexion`
+     - Linux: `~/.config/nexion`
+   - 可以选择自定义位置
+
+### 环境变量
+
+可选的环境变量配置：
+
+```bash
+# 设置数据目录
+export NEXION_DATA_DIR="/path/to/data"
+
+# 设置日志级别
+export NEXION_LOG_LEVEL="debug"
+
+# 设置网络端点
+export NEXION_RPC_URL="https://rpc.xlayer.tech"
+```
+
+## 🔄 升级
+
+### 自动升级
+
+Nexion 会自动检查更新：
+- 启动时检查新版本
+- 有新版本时显示通知
+- 一键升级到最新版本
+
+### 手动升级
+
+如果自动升级失败：
+
+1. **备份数据**（重要！）
+   ```bash
+   # 备份配置文件
+   cp -r ~/.config/nexion ~/.config/nexion.backup
+   ```
+
+2. **下载新版本**
+   - 访问官网下载最新版本
+   - 或使用命令行工具
+
+3. **安装新版本**
+   - 按照正常安装流程
+   - 配置和数据会自动迁移
+
+## 🗑️ 卸载
+
+### Windows
+
+```
+控制面板 → 程序和功能 → 找到 Nexion → 卸载
+```
+
+或使用命令行：
+```cmd
+wmic product where name="Nexion" call uninstall
+```
+
+### macOS
+
+```bash
+# 删除应用程序
+rm -rf /Applications/Nexion.app
+
+# 清理配置文件（可选）
+rm -rf ~/Library/Application\ Support/Nexion
+```
+
+### Linux
+
+```bash
+# Ubuntu/Debian
+sudo apt remove nexion
+
+# Arch Linux
+sudo pacman -R nexion
+
+# Flatpak
+flatpak uninstall com.nexion.Nexion
+```
+
+## ❓ 安装问题排除
+
+### Windows 常见问题
+
+**问题**: 安装时提示"Windows 已保护你的电脑"
+```
+解决方案:
+1. 点击"更多信息"
+2. 点击"仍要运行"
+3. 或右键安装包 → 属性 → 取消"阻止"复选框
+```
+
+**问题**: 缺少 Visual C++ 运行库
+```
+解决方案:
+下载并安装 Microsoft Visual C++ Redistributable
+```
+
+### macOS 常见问题
+
+**问题**: 应用已损坏，无法打开
+```bash
+# 解决方案
+sudo spctl --master-disable
+xattr -cr /Applications/Nexion.app
+sudo spctl --master-enable
+```
+
+### Linux 常见问题
+
+**问题**: 缺少依赖库
+```bash
+# Ubuntu/Debian
+sudo apt-get install libgtk-3-0 libnotify4 libnss3
+
+# CentOS/RHEL
+sudo yum install gtk3 libnotify nss
+```
+
+---
+
+安装完成后，继续阅读 [快速开始](/docs/getting-started) 开始使用 Nexion！
