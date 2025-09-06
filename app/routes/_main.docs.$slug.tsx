@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router'
 import { MDXProvider } from '@mdx-js/react'
+import { useLanguage } from '../i18n/useLanguage'
 
 // Glob all MDX in /docs as React components
 const modules = import.meta.glob('/docs/**/*.mdx', { eager: true })
@@ -20,6 +21,7 @@ const entries = Object.entries(modules).map(([path, mod]) => ({
 export default function DocPage() {
   const { slug } = useParams<{ slug: string }>()
   const nav = useNavigate()
+  const { t } = useLanguage()
   const item = useMemo(() => entries.find((e) => e.slug === slug), [slug])
   const scrollRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -48,9 +50,9 @@ export default function DocPage() {
       <section className="h-screen overflow-hidden pt-16">
         <div className="h-full flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">未找到文档</h1>
+            <h1 className="text-2xl font-bold mb-4">{t('docs.notFound')}</h1>
             <button className="text-[#BCFF2F] underline hover:text-[#a3e62a] transition-colors" onClick={() => nav('/docs/getting-started')}>
-              返回文档
+              {t('docs.backToDocs')}
             </button>
           </div>
         </div>
@@ -93,7 +95,7 @@ export default function DocPage() {
       <div className="max-w-7xl mx-auto h-full px-6">
         {/* 移动端导航下拉菜单 */}
         <div className="md:hidden pb-4">
-          <select value={slug} onChange={(e) => nav(`/docs/${e.target.value}`)} className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white text-sm capitalize">
+          <select value={slug} onChange={(e) => nav(`/docs/${e.target.value}`)} className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white text-sm capitalize" aria-label={t('docs.mobile.selectDoc')}>
             {entries.map((e) => (
               <option key={e.slug} value={e.slug} className="capitalize">
                 {e.slug.replace(/-/g, ' ')}
@@ -109,7 +111,7 @@ export default function DocPage() {
             <div className="sticky top-24 w-full">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.25)] overflow-hidden">
                 <div className="px-4 pt-4 pb-3 border-b border-white/10">
-                  <h2 className="text-xs uppercase tracking-wider text-gray-400">文档导航</h2>
+                  <h2 className="text-xs uppercase tracking-wider text-gray-400">{t('docs.navigation')}</h2>
                 </div>
                 <nav className="max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent py-2">
                   {entries.map((e) => (
@@ -141,13 +143,13 @@ export default function DocPage() {
                 {/* 文档底部导航 */}
                 <div className="mt-16 pt-8 border-t border-white/10">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div className="text-sm text-gray-400">最后更新: {new Date().toLocaleDateString('zh-CN')}</div>
+                    <div className="text-sm text-gray-400">{t('docs.lastUpdated')}: {new Date().toLocaleDateString()}</div>
                     <div className="flex gap-4">
                       <a href="https://github.com/AceXiamo/Nexion/issues" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-[#BCFF2F] transition-colors">
-                        报告问题
+                        {t('docs.reportIssue')}
                       </a>
                       <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-[#BCFF2F] transition-colors">
-                        编辑此页
+                        {t('docs.editPage')}
                       </a>
                     </div>
                   </div>
@@ -161,7 +163,7 @@ export default function DocPage() {
             <div className="sticky top-0">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.25)] overflow-hidden">
                 <div className="px-4 pt-4 pb-3 border-b border-white/10">
-                  <div className="text-xs uppercase tracking-wider text-gray-400">目录</div>
+                  <div className="text-xs uppercase tracking-wider text-gray-400">{t('docs.toc')}</div>
                 </div>
                 <nav ref={tocRef} className="max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent py-2 text-sm">
                   {toc.map((h) => (
