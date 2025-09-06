@@ -1,84 +1,61 @@
-import { motion } from "framer-motion";
-import { Icon } from "@iconify/react";
-import { useState, useEffect } from "react";
+import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(() => {
+    // Check if navigation animation has already been shown in this session
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('navbar-animated') === 'true'
+    }
+    return false
+  })
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
+      setScrolled(window.scrollY > 100)
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!hasAnimated) {
+      // Mark as animated after initial load
+      const timer = setTimeout(() => {
+        setHasAnimated(true)
+        sessionStorage.setItem('navbar-animated', 'true')
+      }, 800) // After animation completes
+
+      return () => clearTimeout(timer)
+    }
+  }, [hasAnimated])
 
   return (
-    <motion.nav
-      className={`fixed top-0 w-full z-50 backdrop-blur-lg border-b border-white/10 transition-colors duration-300 ${
-        scrolled ? "bg-black/90" : "bg-black/80"
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <nav className={`fixed top-0 w-full z-50 backdrop-blur-lg border-b border-white/10 transition-colors duration-300 ${scrolled ? 'bg-black/90' : 'bg-black/80'}`}>
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <motion.div
-            className="flex items-center space-x-3"
-            whileHover={{ scale: 1.02 }}
-          >
-            <motion.img
-              src="/logo.png"
-              alt="Nexion Logo"
-              className="w-10 h-10"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-            />
-            {/* <span className="text-xl font-bold bg-gradient-to-r from-[#BCFF2F] to-blue-400 bg-clip-text text-transparent">
-              Nexion
-            </span> */}
-          </motion.div>
-          
-          <motion.div
-            className="flex items-center gap-6"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <motion.a
-              href="#download"
-              className="text-gray-300 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          <div className="flex items-center space-x-3">
+            <img src="/logo.png" alt="Nexion Logo" className="w-10 h-10" />
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a href="/" className="text-gray-300 hover:text-white transition-colors">
+              首页
+            </a>
+            {/* <a href="#download" className="text-gray-300 hover:text-white transition-colors">
               下载
-            </motion.a>
-            <motion.a
-              href="https://github.com/AceXiamo/Nexion/wiki"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            </a> */}
+            <a href="/docs/getting-started" className="text-gray-300 hover:text-white transition-colors">
               文档
-            </motion.a>
-            <motion.a
-              href="https://github.com/AceXiamo/Nexion"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Icon icon="mdi:github" className="text-xl" />
+            </a>
+            <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
               <span>GitHub</span>
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
         </div>
       </div>
-    </motion.nav>
-  );
+    </nav>
+  )
 }

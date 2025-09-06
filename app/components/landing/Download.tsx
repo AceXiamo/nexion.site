@@ -3,9 +3,9 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 
 const PLATFORMS = [
-  { key: "windows", name: "Windows", desc: "适用于 Windows 10/11", icon: "mdi:microsoft-windows" },
-  { key: "mac", name: "macOS", desc: "适用于 macOS 11+", icon: "mdi:apple" },
-  { key: "linux", name: "Linux", desc: "支持多种发行版", icon: "mdi:linux" },
+  { key: "windows", name: "Windows", desc: "即将推出", icon: "mdi:microsoft-windows", available: false },
+  { key: "mac", name: "macOS", desc: "适用于 macOS 11+", icon: "mdi:apple", available: true },
+  { key: "linux", name: "Linux", desc: "即将推出", icon: "mdi:linux", available: false },
 ] as const;
 
 export function Download() {
@@ -34,41 +34,59 @@ export function Download() {
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">下载 Nexion</h2>
           <p className="text-base md:text-lg text-gray-400 mb-10">
-            开源、跨平台，支持 Windows / macOS / Linux（从 GitHub Releases 获取最新版本）
+            目前提供 macOS 下载，Windows / Linux 即将推出（从 GitHub Releases 获取）
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          {PLATFORMS.map((p) => (
-            <a
-              key={p.key}
-              href={latestUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group block text-left p-5 rounded-xl border border-white/10 hover:bg-white/[0.03] transition-colors ${
-                os === p.key ? "ring-1 ring-[#BCFF2F]" : ""
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center">
-                  <Icon icon={p.icon} className="w-5 h-5 text-white/80 group-hover:text-[#BCFF2F]" />
-                </div>
-                <div>
-                  <div className="text-white font-medium flex items-center gap-2">
-                    {p.name}
-                    {os === p.key && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-[#BCFF2F]/15 text-[#BCFF2F]">推荐</span>
-                    )}
+          {PLATFORMS.map((p) => {
+            const isRecommended = p.key === "mac" && os === "mac";
+            const disabled = !p.available;
+            const commonClasses = `group block text-left p-5 rounded-xl border transition-colors ${
+              disabled
+                ? "border-white/10 bg-white/[0.02] opacity-60 cursor-not-allowed"
+                : "border-white/10 hover:bg-white/[0.03]"
+            } ${isRecommended ? "ring-1 ring-[#BCFF2F]" : ""}`;
+            const Box: any = disabled ? "div" : "a";
+            return (
+              <Box
+                key={p.key}
+                href={disabled ? undefined : latestUrl}
+                target={disabled ? undefined : "_blank"}
+                rel={disabled ? undefined : "noopener noreferrer"}
+                aria-disabled={disabled || undefined}
+                className={commonClasses}
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center">
+                    <Icon icon={p.icon} className={`w-5 h-5 ${disabled ? "text-white/50" : "text-white/80 group-hover:text-[#BCFF2F]"}`} />
                   </div>
-                  <div className="text-sm text-gray-400 mt-1">{p.desc}</div>
+                  <div>
+                    <div className="text-white font-medium flex items-center gap-2">
+                      {p.name}
+                      {isRecommended && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#BCFF2F]/15 text-[#BCFF2F]">推荐</span>
+                      )}
+                      {!p.available && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/70">即将推出</span>
+                      )}
+                    </div>
+                    <div className="text-sm text-gray-400 mt-1">{p.desc}</div>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-4 inline-flex items-center text-sm text-[#BCFF2F]">
-                前往 Releases 下载
-                <Icon icon="mdi:external-link" className="ml-1" />
-              </div>
-            </a>
-          ))}
+                <div className="mt-4 inline-flex items-center text-sm ${disabled ? 'text-white/40' : 'text-[#BCFF2F]'}">
+                  {disabled ? (
+                    <>敬请期待</>
+                  ) : (
+                    <>
+                      前往 Releases 下载
+                      <Icon icon="mdi:external-link" className="ml-1" />
+                    </>
+                  )}
+                </div>
+              </Box>
+            );
+          })}
         </div>
 
         <motion.div
@@ -94,4 +112,3 @@ export function Download() {
     </section>
   );
 }
-
