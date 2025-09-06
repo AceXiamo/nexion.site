@@ -168,7 +168,7 @@ export default function DocPage() {
                       <a href="https://github.com/AceXiamo/Nexion/issues" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-[#BCFF2F] transition-colors">
                         {t('docs.reportIssue')}
                       </a>
-                      <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-[#BCFF2F] transition-colors">
+                      <a href="https://github.com/NexionDev" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-400 hover:text-[#BCFF2F] transition-colors">
                         {t('docs.editPage')}
                       </a>
                     </div>
