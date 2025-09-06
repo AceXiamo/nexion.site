@@ -8,9 +8,9 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({
-  title = "Nexion - 下一代Web3 SSH管理器",
-  description = "用你的加密钱包替代传统SSH密钥，将配置安全存储在区块链上。体验去中心化时代的服务器管理革命。",
-  keywords = "SSH, Web3, 区块链, 加密钱包, 服务器管理, OKX, X Layer, 去中心化, 终端, 安全",
+  title = "Nexion - Next-Gen Web3 SSH Manager",
+  description = "Replace traditional SSH keys with your crypto wallet. Store configurations securely on blockchain. Experience the server management revolution in the decentralized era.",
+  keywords = "SSH, Web3, Blockchain, Crypto Wallet, Server Management, OKX, X Layer, Decentralized, Terminal, Security",
   ogImage = "/og-image.jpg",
   canonicalUrl = "https://nexion.tech",
   structuredData
@@ -29,7 +29,7 @@ export function SEOHead({
     { property: "og:url", content: canonicalUrl },
     { property: "og:image", content: ogImage },
     { property: "og:site_name", content: "Nexion" },
-    { property: "og:locale", content: "zh_CN" },
+    { property: "og:locale", content: "en_US" },
     
     // Twitter Card
     { name: "twitter:card", content: "summary_large_image" },
@@ -63,12 +63,12 @@ export function SEOHead({
   };
 }
 
-// 结构化数据模板
+// Structured Data Template
 export const NexionStructuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Nexion",
-  "description": "下一代Web3 SSH管理器，用加密钱包替代传统SSH密钥",
+  "description": "Next-generation Web3 SSH Manager, replace traditional SSH keys with crypto wallet",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": ["Windows", "macOS", "Linux"],
   "offers": {
@@ -82,11 +82,11 @@ export const NexionStructuredData = {
   },
   "downloadUrl": "https://github.com/AceXiamo/Nexion",
   "featureList": [
-    "Web3 钱包认证",
-    "区块链配置存储",
-    "端到端加密",
-    "跨平台支持",
-    "多设备同步"
+    "Web3 Wallet Authentication",
+    "Blockchain Configuration Storage",
+    "End-to-End Encryption",
+    "Cross-Platform Support",
+    "Multi-Device Sync"
   ],
   "screenshot": "/screenshots/nexion-dashboard.jpg"
 };

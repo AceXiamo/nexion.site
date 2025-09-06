@@ -9,14 +9,14 @@ const productHrefs = ["#features", "#pricing", "#download", "https://github.com/
 const techHrefs = [
   "https://www.okx.com/xlayer",
   "https://www.okx.com/web3",
-  "https://github.com/AceXiamo/Nexion",
-  "https://github.com/AceXiamo/Nexion/tree/main/contracts"
+  "https://github.com/NexionDev",
+  "https://github.com/NexionDev/contracts"
 ];
 
 const socialLinks = [
-  { icon: "mdi:github", href: "https://github.com/AceXiamo/Nexion" },
-  { icon: "mdi:twitter", href: "#" },
-  { icon: "mdi:discord", href: "#" }
+  { icon: "mdi:github", href: "https://github.com/NexionDev" },
+  // { icon: "mdi:twitter", href: "#" },
+  // { icon: "mdi:discord", href: "#" }
 ];
 
 export function Footer() {

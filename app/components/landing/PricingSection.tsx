@@ -6,6 +6,7 @@ import { OKXCard } from "../ui/OKXCard";
 import { useLanguage } from "../../i18n/useLanguage";
 
 const FEES_OKB = { registration: 0.1, addConfig: 0.02, updateConfig: 0.005 };
+const OKB_PRICE_USD = 190; // Current OKB price in USD
 
 export function PricingSection() {
   const { t } = useLanguage();
@@ -15,6 +16,12 @@ export function PricingSection() {
     price: string;
   }>;
   const advantages = t('pricing.advantages.items', { returnObjects: true }) as string[];
+  
+  // Calculate USD prices
+  const calculateUSDPrice = (okbAmount: number) => {
+    const usdPrice = okbAmount * OKB_PRICE_USD;
+    return usdPrice < 0.01 ? '< $0.01' : `$${usdPrice.toFixed(2)}`;
+  };
   
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -41,6 +48,9 @@ export function PricingSection() {
           <div className="divide-y divide-white/10 border border-white/10 rounded-xl overflow-hidden">
             {fees.map((fee, i) => {
               const icons = ["mdi:account-plus", "mdi:server-plus", "mdi:pencil"];
+              const okbAmounts = [FEES_OKB.registration, FEES_OKB.addConfig, FEES_OKB.updateConfig];
+              const usdPrice = calculateUSDPrice(okbAmounts[i]);
+              
               return (
                 <div key={i} className="flex items-center justify-between p-4">
                   <div className="flex items-center gap-3">
@@ -50,7 +60,10 @@ export function PricingSection() {
                       <div className="text-gray-400 text-sm">{fee.description}</div>
                     </div>
                   </div>
-                  <div className="text-white font-semibold">{fee.price}</div>
+                  <div className="text-right">
+                    <div className="text-white font-semibold">{fee.price}</div>
+                    <div className="text-gray-400 text-sm">≈ {usdPrice}</div>
+                  </div>
                 </div>
               );
             })}
@@ -79,12 +92,13 @@ export function PricingSection() {
 
         {/* 价格注释 */}
         <motion.div
-          className="mt-8 text-center text-sm text-gray-500"
+          className="mt-8 text-center text-sm text-gray-500 space-y-1"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <p>{t('pricing.note')}</p>
+          <p>USD prices calculated at OKB = ${OKB_PRICE_USD} (prices may vary with market)</p>
         </motion.div>
       </div>
     </section>
