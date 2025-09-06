@@ -32,14 +32,19 @@ export default function DocPage() {
 
   const handleTocClick = (id: string, e: React.MouseEvent) => {
     e.preventDefault()
-    const scroller = scrollRef.current
-    const root = contentRef.current
-    if (!scroller || !root) return
-    const target = root.querySelector<HTMLElement>(`#${CSS?.escape ? CSS.escape(id) : id}`)
+    const root = contentRef.current || document
+    const selector = `#${CSS?.escape ? CSS.escape(id) : id}`
+    const target = (root as Document | HTMLElement).querySelector<HTMLElement>(selector)
     if (!target) return
-    const top = Math.max(0, target.offsetTop - 8)
-    scroller.scrollTo({ top, behavior: 'smooth' })
-    // update hash without window scroll
+    // 统一使用 scrollIntoView，配合标题上的 scroll-mt 实现偏移，无论是容器滚动还是整页滚动都有效
+    try {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } catch {
+      // 旧浏览器兜底
+      const y = target.getBoundingClientRect().top + window.scrollY
+      window.scrollTo({ top: Math.max(0, y - 80), behavior: 'smooth' })
+    }
+    // 更新 URL 哈希而不触发默认跳转行为
     try {
       history.replaceState(null, '', `#${id}`)
     } catch {}
@@ -84,7 +89,7 @@ export default function DocPage() {
     ol: (props: any) => <ol {...props} className="list-decimal pl-5 my-3 text-sm md:text-base space-y-1" />,
     li: (props: any) => <li {...props} className="text-gray-300 leading-6" />,
     blockquote: (props: any) => <blockquote {...props} className="my-4 border-l-2 border-white/15 pl-3 text-gray-300 text-sm md:text-base italic" />,
-    code: (props: any) => <code {...props} className="px-1.5 py-0.5 rounded bg-white/10 text-[#BCFF2F] text-sm font-mono" />,
+    code: (props: any) => <code {...props} className="py-0.5 rounded text-[#BCFF2F] text-sm font-mono" />,
     pre: Pre,
     hr: (props: any) => <hr {...props} className="my-6 border-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />,
   } as const
@@ -203,5 +208,21 @@ export function useDocEffects(contentRef: React.RefObject<HTMLDivElement | null>
       level: n.tagName === 'H1' ? 1 : n.tagName === 'H2' ? 2 : 3,
     }))
     setToc(items)
+    // 若存在 URL 哈希，渲染完成后滚动到对应位置（支持整页或容器滚动）
+    const hash = decodeURIComponent((window.location.hash || '').replace(/^#/, ''))
+    if (hash) {
+      const target = root.querySelector<HTMLElement>(`#${CSS?.escape ? CSS.escape(hash) : hash}`)
+      if (target) {
+        // 下一帧滚动，确保布局稳定
+        requestAnimationFrame(() => {
+          try {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          } catch {
+            const y = target.getBoundingClientRect().top + window.scrollY
+            window.scrollTo({ top: Math.max(0, y - 80), behavior: 'smooth' })
+          }
+        })
+      }
+    }
   }, [contentRef, setToc, slug])
 }
