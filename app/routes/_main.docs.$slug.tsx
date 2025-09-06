@@ -11,9 +11,15 @@ function toSlug(path: string) {
   return file.replace(/\.mdx?$/, '')
 }
 
+function getLanguageFromPath(path: string): 'zh' | 'en' {
+  if (path.includes('/en/')) return 'en'
+  return 'zh'
+}
+
 const entries = Object.entries(modules).map(([path, mod]) => ({
   path,
   slug: toSlug(path),
+  language: getLanguageFromPath(path),
   // @ts-ignore - MDX default export is a component
   Component: (mod as any).default,
 }))
@@ -21,8 +27,16 @@ const entries = Object.entries(modules).map(([path, mod]) => ({
 export default function DocPage() {
   const { slug } = useParams<{ slug: string }>()
   const nav = useNavigate()
-  const { t } = useLanguage()
-  const item = useMemo(() => entries.find((e) => e.slug === slug), [slug])
+  const { t, currentLanguage } = useLanguage()
+  const item = useMemo(() => {
+    // First try to find exact language match
+    let found = entries.find((e) => e.slug === slug && e.language === currentLanguage)
+    // If not found, try fallback to Chinese
+    if (!found) {
+      found = entries.find((e) => e.slug === slug && e.language === 'zh')
+    }
+    return found
+  }, [slug, currentLanguage])
   const scrollRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const [toc, setToc] = useState<Array<{ id: string; text: string; level: number }>>([])
@@ -102,7 +116,7 @@ export default function DocPage() {
         {/* 移动端导航下拉菜单 */}
         <div className="md:hidden pb-4">
           <select value={slug} onChange={(e) => nav(`/docs/${e.target.value}`)} className="w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white text-sm capitalize" aria-label={t('docs.mobile.selectDoc')}>
-            {entries.map((e) => (
+            {entries.filter(e => e.language === currentLanguage).map((e) => (
               <option key={e.slug} value={e.slug} className="capitalize">
                 {e.slug.replace(/-/g, ' ')}
               </option>
@@ -120,7 +134,7 @@ export default function DocPage() {
                   <h2 className="text-xs uppercase tracking-wider text-gray-400">{t('docs.navigation')}</h2>
                 </div>
                 <nav className="max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent py-2">
-                  {entries.map((e) => (
+                  {entries.filter(e => e.language === currentLanguage).map((e) => (
                     <Link
                       key={e.slug}
                       to={`/docs/${e.slug}`}
