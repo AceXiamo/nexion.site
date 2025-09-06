@@ -53,7 +53,7 @@ export function Navbar() {
             <a href="/docs/getting-started" className="text-gray-300 hover:text-white transition-colors">
               {t('nav.docs')}
             </a>
-            <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+            <a href="https://github.com/AceXiamo/Nexion" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
               <span>{t('nav.github')}</span>
             </a>
             <LanguageSwitcher />

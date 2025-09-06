@@ -308,7 +308,7 @@ export function Hero() {
                 <OKXButtons.Demo className="w-full sm:w-auto" />
               </div>
 
-              <div className="mt-6 flex items-center justify-center md:justify-start gap-4 text-gray-500">
+              <div className="mt-6 flex flex-col items-center gap-4 text-gray-500 md:flex-row md:justify-start">
                 <span className="inline-flex items-center gap-2 text-sm">
                   <Icon icon="mdi:shield-lock" className="text-[#BCFF2F]" /> {t('hero.features.encryption')}
                 </span>
@@ -330,15 +330,17 @@ export function Hero() {
           </div>
 
           {/* 生态徽章 */}
-          <div className="mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-gray-400">
-            <span className="text-sm inline-flex items-center gap-2">
-              <Icon icon="mdi:wallet" className="text-[#BCFF2F]" /> OKX Wallet
-            </span>
-            <span className="w-1 h-1 rounded-full bg-gray-600" />
-            <span className="text-sm inline-flex items-center gap-2">
-              <Icon icon="mdi:layers-triple" className="text-[#BCFF2F]" /> X Layer
-            </span>
-            <span className="w-1 h-1 rounded-full bg-gray-600" />
+          <div className="mt-12 md:mt-16 flex flex-col items-center justify-center gap-y-3 text-gray-400 md:flex-row md:flex-wrap md:gap-x-6">
+            <div className="flex items-center gap-x-6">
+              <span className="text-sm inline-flex items-center gap-2">
+                <Icon icon="mdi:wallet" className="text-[#BCFF2F]" /> OKX Wallet
+              </span>
+              <span className="w-1 h-1 rounded-full bg-gray-600 hidden md:block" />
+              <span className="text-sm inline-flex items-center gap-2">
+                <Icon icon="mdi:layers-triple" className="text-[#BCFF2F]" /> X Layer
+              </span>
+            </div>
+            <span className="w-1 h-1 rounded-full bg-gray-600 hidden md:block" />
             <span className="text-sm inline-flex items-center gap-2">
               <Icon icon="mdi:license" className="text-[#BCFF2F]" /> {t('hero.ecosystem.license')}
             </span>

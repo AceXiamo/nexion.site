@@ -159,23 +159,25 @@ export function VideoShowcase({ src = 'https://r2.acexiamo.com/nexion.mp4' }: Pr
             <video ref={videoRef} src={src} className="w-full h-full object-cover" preload="metadata" playsInline controls={false} onClick={togglePlay} />
 
             {/* Play/Pause overlay */}
-            <button
-              ref={playBtnRef}
-              onClick={togglePlay}
-              aria-label={isPlaying ? '暂停' : t('videoShowcase.playButton')}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-16 w-16 rounded-full bg-[#BCFF2F] text-black font-bold flex items-center justify-center shadow-[0_0_40px_rgba(188,255,47,0.5)] hover:scale-105 transition will-change-transform"
-            >
-              {isPlaying ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <rect x="6" y="5" width="4" height="14" rx="1" />
-                  <rect x="14" y="5" width="4" height="14" rx="1" />
-                </svg>
-              ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
+            <div className='inset-0 absolute flex justify-center items-center'>
+              <button
+                ref={playBtnRef}
+                onClick={togglePlay}
+                aria-label={isPlaying ? '暂停' : t('videoShowcase.playButton')}
+                className="z-10 h-16 w-16 rounded-full bg-[#BCFF2F] text-black font-bold flex items-center justify-center shadow-[0_0_40px_rgba(188,255,47,0.5)] hover:scale-105 transition will-change-transform"
+              >
+                {isPlaying ? (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                  </svg>
+                ) : (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                )}
+              </button>
+            </div>
 
             {/* Mute toggle */}
             <button
