@@ -5,7 +5,7 @@ import { useInView } from "framer-motion";
 import { OKXCard } from "../ui/OKXCard";
 import { useLanguage } from "../../i18n/useLanguage";
 
-const FEES_OKB = { registration: 0.1, addConfig: 0.02, updateConfig: 0.005 };
+const FEES_OKB = { registration: 0.02, addConfig: 0.005, updateConfig: 0.0015 };
 const OKB_PRICE_USD = 190; // Current OKB price in USD
 
 export function PricingSection() {
