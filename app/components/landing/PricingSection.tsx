@@ -97,6 +97,7 @@ export function PricingSection() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
+          <p>{t('pricing.launchPricingNotice')}</p>
           <p>{t('pricing.note')}</p>
           <p>USD prices calculated at OKB = ${OKB_PRICE_USD} (prices may vary with market)</p>
         </motion.div>

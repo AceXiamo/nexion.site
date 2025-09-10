@@ -156,20 +156,21 @@ const resources = {
           {
             title: '用户注册（一次性）',
             description: '激活链上身份',
-            price: '0.1 OKB'
+            price: '0.02 OKB'
           },
           {
             title: '新增配置',
             description: '每个 SSH 配置上链存储',
-            price: '0.02 OKB'
+            price: '0.005 OKB'
           },
           {
             title: '更新配置',
             description: '修改已有的 SSH 配置',
-            price: '0.005 OKB'
+            price: '0.0015 OKB'
           }
         ],
         note: '基于 OKB 智能定价，Gas 费用约为 $0.01 USD 等值',
+        launchPricingNotice: '当前为发布月定价，活动结束后将恢复原价',
         advantages: {
           title: '我们的优势',
           items: [
@@ -399,20 +400,21 @@ const resources = {
           {
             title: 'User Registration (One-time)',
             description: 'Activate on-chain identity',
-            price: '0.1 OKB'
+            price: '0.02 OKB'
           },
           {
             title: 'Add Configuration',
             description: 'Each SSH config stored on-chain',
-            price: '0.02 OKB'
+            price: '0.005 OKB'
           },
           {
             title: 'Update Configuration',
             description: 'Modify existing SSH configuration',
-            price: '0.005 OKB'
+            price: '0.0015 OKB'
           }
         ],
         note: 'OKB-based smart pricing, Gas fees approximately $0.01 USD equivalent',
+        launchPricingNotice: 'Launch-month pricing; will revert to regular pricing after the promotion',
         advantages: {
           title: 'Our Advantages',
           items: [
