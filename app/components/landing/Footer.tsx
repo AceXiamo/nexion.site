@@ -103,7 +103,7 @@ export function Footer() {
             </motion.div>
             
             <motion.div
-              className="flex space-x-4"
+              className="flex items-center space-x-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -122,6 +122,24 @@ export function Footer() {
                   <Icon icon={link.icon} className="text-2xl" />
                 </motion.a>
               ))}
+              
+              {/* ProductHunt 徽章 */}
+              <motion.a
+                href="https://www.producthunt.com/products/nexion?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nexion"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1105699&theme=dark&size=small"
+                  alt="Nexion - Next-gen web3 ssh manager | Product Hunt"
+                  className="w-[86px] h-[32px]"
+                  width="86"
+                  height="32"
+                />
+              </motion.a>
             </motion.div>
           </div>
           
