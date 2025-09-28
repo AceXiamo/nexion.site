@@ -15,28 +15,33 @@ const resources = {
       },
       // Meta tags
       meta: {
-        title: 'Nexion - The Next-Gen Web3 SSH Manager',
-        description: '用你的加密钱包替代传统SSH密钥，将配置安全存储在区块链上。体验去中心化时代的服务器管理革命。基于OKB的透明定价，节省高达95%成本。',
-        keywords: 'SSH, Web3, 区块链, 加密钱包, 服务器管理, OKX, X Layer, SSH定价, 按需付费, OKB支付'
+        title: 'Nexion - 开源Web3 SSH管理器',
+        description: '开源Web3 SSH管理器，用加密钱包替代传统SSH密钥，将配置安全存储在区块链上。完全免费、自主部署、社区驱动的去中心化服务器管理解决方案。',
+        keywords: 'SSH, Web3, 区块链, 加密钱包, 服务器管理, 开源, 自主部署, MIT许可证, GitHub'
       },
       // Hero section
       hero: {
         version: 'v1.0',
         builtOn: 'Built on X Layer • OKX Wallet',
-        title: '用钱包，一键管理所有 SSH',
-        tagline1: '钱包即身份',
-        tagline2: '配置上链',
-        tagline3: '端到端加密',
+        title: '开源Web3 SSH管理器',
+        tagline1: '免费开源',
+        tagline2: '自主部署',
+        tagline3: '社区驱动',
         coreCapabilities: '核心能力：',
         keywords: ['统一身份认证', '链上加密存储', '审计可追溯', '团队权限管理'],
-        description: '统一身份认证 · 链上加密存储 · 审计可追溯 · 团队权限管理',
+        description: '用加密钱包替代传统SSH密钥，将配置安全存储在区块链上。完全开源、免费使用、支持自主部署的去中心化服务器管理解决方案。',
+        badges: {
+          mitLicense: 'MIT License',
+          openSource: 'Open Source',
+          builtOnXLayer: 'Built on X Layer'
+        },
         features: {
-          encryption: '端到端加密',
-          compatible: 'EVM兼容',
-          lowCost: 'Gas ~$0.01'
+          openSource: '开源免费',
+          selfHosted: '自主部署',
+          web3Driven: 'Web3驱动'
         },
         ecosystem: {
-          license: 'Apache 2.0'
+          license: 'MIT License'
         }
       },
       // Terminal demo (固定内容，不需要翻译)
@@ -239,7 +244,9 @@ const resources = {
       buttons: {
         download: '立即下载',
         github: '查看源码',
-        demo: '观看演示'
+        demo: '观看演示',
+        starOnGitHub: 'Star on GitHub',
+        fork: 'Fork'
       },
       // Common
       common: {
@@ -259,28 +266,33 @@ const resources = {
       },
       // Meta tags
       meta: {
-        title: 'Nexion - Next-Gen Web3 SSH Manager',
-        description: 'Replace traditional SSH keys with your crypto wallet. Store configurations securely on blockchain. Experience the server management revolution in the decentralized era. Transparent OKB-based pricing, save up to 95% costs.',
-        keywords: 'SSH, Web3, Blockchain, Crypto Wallet, Server Management, OKX, X Layer, SSH Pricing, Pay-as-you-go, OKB Payment'
+        title: 'Nexion - Open Source Web3 SSH Manager',
+        description: 'Open source Web3 SSH manager that replaces traditional SSH keys with crypto wallets. Store configurations securely on blockchain. Free, self-hosted, and community-driven server management solution.',
+        keywords: 'SSH, Web3, Blockchain, Crypto Wallet, Server Management, Open Source, Self-hosted, MIT License, GitHub'
       },
       // Hero section
       hero: {
         version: 'v1.0',
         builtOn: 'Built on X Layer • OKX Wallet',
-        title: 'Manage All SSH with Your Wallet',
-        tagline1: 'Wallet as Identity',
-        tagline2: 'Config on Chain',
-        tagline3: 'End-to-End Encrypted',
+        title: 'Open Source Web3 SSH Manager',
+        tagline1: 'Free & Open Source',
+        tagline2: 'Self-Hosted',
+        tagline3: 'Community-Driven',
         coreCapabilities: 'Core Capabilities:',
         keywords: ['Unified Authentication', 'On-Chain Encrypted Storage', 'Audit Traceability', 'Team Permission Management'],
-        description: 'Unified Authentication · On-Chain Encrypted Storage · Audit Traceability · Team Permission Management',
+        description: 'Replace traditional SSH keys with crypto wallets. Store configurations securely on blockchain. A completely open source, free-to-use, self-hostable decentralized server management solution.',
+        badges: {
+          mitLicense: 'MIT License',
+          openSource: 'Open Source',
+          builtOnXLayer: 'Built on X Layer'
+        },
         features: {
-          encryption: 'End-to-End Encrypted',
-          compatible: 'EVM Compatible',
-          lowCost: 'Gas ~$0.01'
+          openSource: 'Free & Open Source',
+          selfHosted: 'Self-Hosted',
+          web3Driven: 'Web3-Driven'
         },
         ecosystem: {
-          license: 'Apache 2.0'
+          license: 'MIT License'
         }
       },
       // Terminal demo (固定内容，不需要翻译)
@@ -483,7 +495,9 @@ const resources = {
       buttons: {
         download: 'Download Now',
         github: 'View Source',
-        demo: 'Watch Demo'
+        demo: 'Watch Demo',
+        starOnGitHub: 'Star on GitHub',
+        fork: 'Fork'
       },
       // Common
       common: {

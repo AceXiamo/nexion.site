@@ -114,7 +114,7 @@ export function OKXButton({
 
 // 预设的按钮组合
 export const OKXButtons = {
-  Download: ({ className, href = "https://github.com/NexionDev/app/releases", target = "_blank", ...props }: Omit<OKXButtonProps, 'children'>) => {
+  Download: ({ className, href = "https://github.com/AceXiamo/Nexion/releasess", target = "_blank", ...props }: Omit<OKXButtonProps, 'children'>) => {
     const { t } = useLanguage();
     return (
       <OKXButton 
@@ -133,15 +133,47 @@ export const OKXButtons = {
   GitHub: ({ className, ...props }: Omit<OKXButtonProps, 'children' | 'href' | 'target'>) => {
     const { t } = useLanguage();
     return (
-      <OKXButton 
-        variant="secondary" 
-        icon="mdi:github" 
-        href="https://github.com/NexionDev"
+      <OKXButton
+        variant="secondary"
+        icon="mdi:github"
+        href="https://github.com/AceXiamo/Nexion"
         target="_blank"
         className={className}
         {...props}
       >
         {t('buttons.github')}
+      </OKXButton>
+    );
+  },
+
+  StarOnGitHub: ({ className, ...props }: Omit<OKXButtonProps, 'children' | 'href' | 'target'>) => {
+    const { t } = useLanguage();
+    return (
+      <OKXButton
+        variant="primary"
+        icon="mdi:star"
+        href="https://github.com/AceXiamo/Nexion"
+        target="_blank"
+        className={className}
+        {...props}
+      >
+        {t('buttons.starOnGitHub')}
+      </OKXButton>
+    );
+  },
+
+  Fork: ({ className, ...props }: Omit<OKXButtonProps, 'children' | 'href' | 'target'>) => {
+    const { t } = useLanguage();
+    return (
+      <OKXButton
+        variant="ghost"
+        icon="mdi:source-fork"
+        href="https://github.com/AceXiamo/Nexion/fork"
+        target="_blank"
+        className={className}
+        {...props}
+      >
+        {t('buttons.fork')}
       </OKXButton>
     );
   },

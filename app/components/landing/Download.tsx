@@ -32,7 +32,7 @@ export function Download() {
     else setOs("linux");
   }, []);
 
-  const latestUrl = "https://github.com/NexionDev/app/releases";
+  const latestUrl = "https://github.com/AceXiamo/Nexion/releasess";
 
   return (
     <section ref={ref} id="download" className="py-20">

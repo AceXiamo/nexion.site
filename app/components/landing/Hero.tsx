@@ -251,9 +251,19 @@ export function Hero() {
           <div ref={titleContainerRef} className={`pt-28 md:pt-36 grid md:grid-cols-12 gap-8 items-center ${allowMotion ? 'opacity-0 translate-y-8' : ''}`}>
             {/* 左：标题与卖点 */}
             <div className="md:col-span-7 text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-white/5 border border-white/10 text-gray-300">{t('hero.version')}</span>
-                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-[#BCFF2F]/10 border border-[#BCFF2F]/30 text-[#BCFF2F]">{t('hero.builtOn')}</span>
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-4 flex-wrap">
+                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-green-500/10 border border-green-500/30 text-green-400">
+                  <Icon icon="mdi:license" className="inline mr-1" />
+                  {t('hero.badges.mitLicense')}
+                </span>
+                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-blue-500/10 border border-blue-500/30 text-blue-400">
+                  <Icon icon="mdi:github" className="inline mr-1" />
+                  {t('hero.badges.openSource')}
+                </span>
+                <span className="px-3 py-1 rounded-full text-[11px] tracking-wide bg-[#BCFF2F]/10 border border-[#BCFF2F]/30 text-[#BCFF2F]">
+                  <Icon icon="mdi:layers-triple" className="inline mr-1" />
+                  {t('hero.badges.builtOnXLayer')}
+                </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
@@ -289,12 +299,12 @@ export function Hero() {
               <div ref={descriptionRef} className={`mt-6 md:mt-8 max-w-2xl mx-auto md:mx-0 ${allowMotion ? 'opacity-0 translate-y-8' : ''}`}>
                 <div className="min-h-[48px] sm:min-h-[48px] md:min-h-[56px]">
                   {allowMotion ? (
-                    <TypingGlow 
+                    <TypingGlow
                       key={`typing-${typingKey}-${currentLanguage}`}
-                      text={t('hero.description')} 
-                      className="block text-base md:text-lg text-[#CCCCCC]" 
-                      speed={26} 
-                      delay={600} 
+                      text={t('hero.description')}
+                      className="block text-base md:text-lg text-[#CCCCCC]"
+                      speed={26}
+                      delay={600}
                     />
                   ) : (
                     <p className="text-base md:text-lg text-[#CCCCCC]">{t('hero.description')}</p>
@@ -303,20 +313,20 @@ export function Hero() {
               </div>
 
               <div ref={buttonsRef} className={`mt-8 md:mt-10 flex flex-col sm:flex-row items-center md:items-start gap-4 ${allowMotion ? 'opacity-0 translate-y-8' : ''}`}>
-                <OKXButtons.Download className="w-full sm:w-auto" />
+                <OKXButtons.StarOnGitHub className="w-full sm:w-auto" />
                 <OKXButtons.GitHub className="w-full sm:w-auto" />
-                <OKXButtons.Demo className="w-full sm:w-auto" />
+                <OKXButtons.Fork className="w-full sm:w-auto" />
               </div>
 
               <div className="mt-6 flex flex-col items-center gap-4 text-gray-500 md:flex-row md:justify-start">
                 <span className="inline-flex items-center gap-2 text-sm">
-                  <Icon icon="mdi:shield-lock" className="text-[#BCFF2F]" /> {t('hero.features.encryption')}
+                  <Icon icon="mdi:lock-open" className="text-[#BCFF2F]" /> {t('hero.features.openSource')}
                 </span>
                 <span className="inline-flex items-center gap-2 text-sm">
-                  <Icon icon="mdi:ethereum" className="text-[#BCFF2F]" /> {t('hero.features.compatible')}
+                  <Icon icon="mdi:server" className="text-[#BCFF2F]" /> {t('hero.features.selfHosted')}
                 </span>
                 <span className="inline-flex items-center gap-2 text-sm">
-                  <Icon icon="mdi:cash" className="text-[#BCFF2F]" /> {t('hero.features.lowCost')}
+                  <Icon icon="mdi:ethereum" className="text-[#BCFF2F]" /> {t('hero.features.web3Driven')}
                 </span>
               </div>
             </div>
@@ -333,16 +343,16 @@ export function Hero() {
           <div className="mt-12 md:mt-16 flex flex-col items-center justify-center gap-y-3 text-gray-400 md:flex-row md:flex-wrap md:gap-x-6">
             <div className="flex items-center gap-x-6">
               <span className="text-sm inline-flex items-center gap-2">
-                <Icon icon="mdi:wallet" className="text-[#BCFF2F]" /> OKX Wallet
+                <Icon icon="mdi:github" className="text-[#BCFF2F]" /> {t('hero.badges.openSource')}
               </span>
               <span className="w-1 h-1 rounded-full bg-gray-600 hidden md:block" />
               <span className="text-sm inline-flex items-center gap-2">
-                <Icon icon="mdi:layers-triple" className="text-[#BCFF2F]" /> X Layer
+                <Icon icon="mdi:license" className="text-[#BCFF2F]" /> {t('hero.ecosystem.license')}
               </span>
             </div>
             <span className="w-1 h-1 rounded-full bg-gray-600 hidden md:block" />
             <span className="text-sm inline-flex items-center gap-2">
-              <Icon icon="mdi:license" className="text-[#BCFF2F]" /> {t('hero.ecosystem.license')}
+              <Icon icon="mdi:layers-triple" className="text-[#BCFF2F]" /> {t('hero.badges.builtOnXLayer')}
             </span>
           </div>
         </div>

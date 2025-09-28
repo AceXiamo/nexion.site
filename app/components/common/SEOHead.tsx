@@ -80,7 +80,7 @@ export const NexionStructuredData = {
     "@type": "Organization",
     "name": "Nexion Team"
   },
-  "downloadUrl": "https://github.com/NexionDev/app/releases",
+  "downloadUrl": "https://github.com/AceXiamo/Nexion/releasess",
   "featureList": [
     "Web3 Wallet Authentication",
     "Blockchain Configuration Storage",
