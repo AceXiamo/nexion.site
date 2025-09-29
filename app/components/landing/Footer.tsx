@@ -53,7 +53,6 @@ export function Footer() {
   
   const productLinks = [
     { name: t('footer.links.features'), href: productHrefs[0] },
-    { name: t('footer.links.pricing'), href: productHrefs[1] },
     { name: t('footer.links.download'), href: productHrefs[2] },
     { name: t('footer.links.docs'), href: productHrefs[3] }
   ];
