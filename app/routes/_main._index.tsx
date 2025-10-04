@@ -13,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
   return [
     { title: "Nexion - Open Source Web3 SSH Manager" },
     { name: "description", content: "Open source Web3 SSH manager that replaces traditional SSH keys with crypto wallets. Store configurations securely on blockchain. Free, self-hosted, and community-driven server management solution." },
-    { name: "keywords", content: "SSH, Web3, Blockchain, Crypto Wallet, Server Management, Open Source, Self-hosted, MIT License, GitHub" },
+    { name: "keywords", content: "SSH, Web3, Blockchain, Crypto Wallet, Server Management, Open Source, Self-hosted, Apache 2.0 License, GitHub" },
 
     // Open Graph
     { property: "og:title", content: "Nexion - Open Source Web3 SSH Manager" },

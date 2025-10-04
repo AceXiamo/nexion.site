@@ -17,7 +17,7 @@ const resources = {
       meta: {
         title: 'Nexion - 开源Web3 SSH管理器',
         description: '开源Web3 SSH管理器，用加密钱包替代传统SSH密钥，将配置安全存储在区块链上。完全免费、自主部署、社区驱动的去中心化服务器管理解决方案。',
-        keywords: 'SSH, Web3, 区块链, 加密钱包, 服务器管理, 开源, 自主部署, MIT许可证, GitHub'
+        keywords: 'SSH, Web3, 区块链, 加密钱包, 服务器管理, 开源, 自主部署, Apache 2.0许可证, GitHub'
       },
       // Hero section
       hero: {
@@ -31,7 +31,7 @@ const resources = {
         keywords: ['统一身份认证', '链上加密存储', '审计可追溯', '团队权限管理'],
         description: '用加密钱包替代传统SSH密钥，将配置安全存储在区块链上。完全开源、免费使用、支持自主部署的去中心化服务器管理解决方案。',
         badges: {
-          mitLicense: 'MIT License',
+          mitLicense: 'Apache 2.0 License',
           openSource: 'Open Source',
           builtOnXLayer: 'Built on X Layer'
         },
@@ -41,7 +41,7 @@ const resources = {
           web3Driven: 'Web3驱动'
         },
         ecosystem: {
-          license: 'MIT License'
+          license: 'Apache 2.0 License'
         }
       },
       // Terminal demo (固定内容，不需要翻译)
@@ -268,7 +268,7 @@ const resources = {
       meta: {
         title: 'Nexion - Open Source Web3 SSH Manager',
         description: 'Open source Web3 SSH manager that replaces traditional SSH keys with crypto wallets. Store configurations securely on blockchain. Free, self-hosted, and community-driven server management solution.',
-        keywords: 'SSH, Web3, Blockchain, Crypto Wallet, Server Management, Open Source, Self-hosted, MIT License, GitHub'
+        keywords: 'SSH, Web3, Blockchain, Crypto Wallet, Server Management, Open Source, Self-hosted, Apache 2.0 License, GitHub'
       },
       // Hero section
       hero: {
@@ -282,7 +282,7 @@ const resources = {
         keywords: ['Unified Authentication', 'On-Chain Encrypted Storage', 'Audit Traceability', 'Team Permission Management'],
         description: 'Replace traditional SSH keys with crypto wallets. Store configurations securely on blockchain. A completely open source, free-to-use, self-hostable decentralized server management solution.',
         badges: {
-          mitLicense: 'MIT License',
+          mitLicense: 'Apache 2.0 License',
           openSource: 'Open Source',
           builtOnXLayer: 'Built on X Layer'
         },
@@ -292,7 +292,7 @@ const resources = {
           web3Driven: 'Web3-Driven'
         },
         ecosystem: {
-          license: 'MIT License'
+          license: 'Apache 2.0 License'
         }
       },
       // Terminal demo (固定内容，不需要翻译)
